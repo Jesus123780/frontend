@@ -3,7 +3,7 @@ import React from 'react'
 import { GET_COURSES } from '../../gql/cursos';
 import { GET_BOOKS } from '../../gql/libros';
 
-export const index = () => {
+export const Books = () => {
     const { data, loading, error } = useQuery(GET_COURSES);
     const [getBooks, { data: dataBooks, loading: loadBooks, error: errBooks }] = useLazyQuery(GET_BOOKS)
     return (
@@ -15,7 +15,7 @@ export const index = () => {
             <button onClick={() => getBooks()}>obtener libros</button>
 
             {!!((loading && !error) || (loadBooks && !errBooks)) && <span>Cargando Libros...</span>}
-            {dataBooks?.books?.map(x => <span key={x.id}>{x.description}<br /></span>)}
+            {dataBooks?.books?.map(books => <span key={books.id}>{books.description}, {books.title}<br /></span>)}
         </div>
     )
 }

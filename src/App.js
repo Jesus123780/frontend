@@ -1,6 +1,6 @@
 import './App.css';
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
-import { index } from './components/index';
+import { Books } from './pages/CostPlaced';
 import { NotFound } from './components/NotFound';
 import { Layout } from './components/aside';
 import { Dashboard } from './components/dashboard';
@@ -14,7 +14,7 @@ function App() {
                     /* ({ isAuth, error }) => */ <Layout /* isAuth={isAuth} */ /* error={error} */>
                         <Switch>
                             {/* rutas inexistentes */}
-                            <Route exact path='/' component={index} />
+                            <Route exact path='/' component={Books} />
                             <Route exact path='/dashboard' component={Dashboard} />
                         </Switch>
                     </Layout>
