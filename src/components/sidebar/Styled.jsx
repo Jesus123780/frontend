@@ -1,6 +1,6 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { Link } from 'react-router-dom'
-import { SEGColor, PColor, BGColor } from '../../assets/colors'
+import { SEGColor, BGColor } from '../../assets/colors'
 export const Span = styled.span`
     color: ${ props => props.active ? '#131313' : `${ SEGColor }` };
     font-weight: 500;
@@ -22,18 +22,41 @@ export const LinkOption = styled(Link)`
 export const SideBarLeft = styled.div`
     justify-self: center;
     transition: .3s;
-    width: 100%;
     position: relative;
+    ${ ({ width }) => width && css`width: ${ width };` }
+    @media( max-width: 1200px ){
+        display: flex;
+        justify-content: space-between;
+        flex-direction: row;
+    }
+`
+export const ContainerOptions = styled.div`
+&>button:nth-child(6){
+    align-self: center;
+    display: flex;
+    position: absolute;
+    bottom: 0;
+    width: 90%;
+}
 
+@media( max-width: 1200px ){
+    }
 `
 export const ContainerUserImg = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
+    & > span{
+        ${ ({ display }) => display && css`display: ${ display };` }
+    }
+`
+export const ButtonMenu = styled.button`
+    background-color: transparent;
 `
 export const Content = styled.div`
     height: 100%;
     width: 90%;
+    margin: auto;
 `
 export const BoxSideBar = styled.aside`
     top: 0;
@@ -59,7 +82,7 @@ export const MenuLeft = styled.button`
     background: ${ SEGColor };
     align-self: ${ ({ alignSelf }) => alignSelf || 'auto' };
     & > div:first-child { pointer-events: none; }
-    transition: .4s;
+    transition: .3s;
     overflow: hidden;
     background-color:${ BGColor };
     border-radius: 15px;
@@ -68,6 +91,7 @@ export const MenuLeft = styled.button`
     & a {
         color: ${ props => props.active ? '#a6b0cf' : '#a6b0cf' };
     }
+     
 `
 export const Row = styled.div`
     display: flex;
@@ -83,8 +107,8 @@ export const Row = styled.div`
     align-items: center;
     margin: auto;
     padding: 15px 0px;
-    & svg{
-        transform: ${ props => props.active ?  ''  : 'rotate(-90deg)' };
+    & > i {
+        transform: ${ props => props.active ? '' : 'rotate(-90deg)' };
     }
 `
 export const OptionMenu = styled.div`
@@ -104,17 +128,17 @@ margin: 1px 0;
     }
 `
 export const BoxTitleNavBar = styled.div`
-    padding: 5px 0 50px;
     text-align: center;
     width: 100%;
     border-radius: 10px; 
-    /* background-image: linear-gradient(95deg, ${ SEGColor }, ${ PColor }); */
     background: ${ SEGColor };
+    padding: 30px 0px;
+    justify-content: space-between;
+    ${ ({ display }) => display && css`display: ${ display };` }
 `
 export const Name = styled.h1`
     color: #FFFFFF;
     font-size: 1.25em;
-    text-align: center;
 `
 export const ContainerBoxUser = styled.button`
     width: 100%;

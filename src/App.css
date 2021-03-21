@@ -9,7 +9,10 @@ h1,h2,h3,h4,h5,h6 { font-size : 100%; }
 
 /* Removes list-style from lists */
 ol,ul { list-style : none; }
-
+button{
+  outline: none;
+  border: none;
+}
 /* Normalizes font-style and font-weight to normal */
 address, caption, cite, code, dfn, em, strong, th, var
 { font-style : normal; font-weight : normal; }

@@ -10,4 +10,8 @@ export const Body = styled.div`
     grid-template-rows: 1fr;
     justify-items: center;
     padding: 30px;
+    @media( max-width: 1200px ){
+        grid-template-columns: 1fr;
+        padding: 0px;
+    } 
 `

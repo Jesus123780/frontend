@@ -3,6 +3,7 @@ import { BGColor, PLColor, PLVColor, SFAColor } from '../../assets/colors'
 
 // Ventana con sombra (tarjetas)
 export const ShadowCardContainer = styled.div`
+    flex: 0 0 33.33333%;
     box-shadow: ${ props => props.movilmode ? 'none' : '0px 0px 6px #00000060' };
     background-color: ${ BGColor };
     width: ${ ({ width }) => width ? width : '96%' };

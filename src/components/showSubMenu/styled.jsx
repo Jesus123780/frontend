@@ -24,8 +24,8 @@ const fadeout = keyframes`
 const fadeInTop = keyframes`
   from {
     opacity: 0;
-    -webkit-transform: translate3d(0, 100%, 0);
-    transform: translate3d(0, 100%, 0);
+    -webkit-transform: translate3d(0, 1%, 0);
+    transform: translate3d(0, 10%, 0);
   }
 
   to {
@@ -47,7 +47,7 @@ const fadeOutTop = keyframes`
       opacity: 0;
       top: 10%;
       left: 50%;
-      transform: translateY(-100%);
+      transform: translateY(-10%);
     }
 `
 export const Container = styled.div`
