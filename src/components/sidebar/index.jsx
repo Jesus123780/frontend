@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import Options from './Options'
-import { SideBarLeft, BoxSideBar, LinkOption, BoxTitleNavBar, Name, ButtonMenu, Content, ContainerBoxUser, ContainerUserImg, SpanItem, ContainerOptions } from './Styled'
-import { IconArrowBottom, IconMenuBurger, IconUser, IconTask, IconBasura, IconGraphic, IconCloseSesion } from '../../assets/icons';
-import { BGColor, PLColor } from '../../assets/colors';
+import { SideBarLeft, BoxSideBar, LinkOption, BoxTitleNavBar, Name, ButtonMenu, Content, ContainerBoxUser, ContainerUserImg, SpanItem, ContainerOptions, ContainerBurger } from './Styled'
+import { IconArrowBottom, IconUser, IconTask, IconBasura, IconGraphic, IconCloseSesion } from '../../assets/icons';
+import { PLColor } from '../../assets/colors';
 import { SubMenu } from '../showSubMenu';
+import { useLocation } from 'react-router';
+import LeftSection from '../LeftSection';
 export const SideBar = () => {
     const [active, setActive] = useState(false)
     const [modal, setModal] = useState(false)
@@ -15,16 +17,37 @@ export const SideBar = () => {
         body.addEventListener('keyup', e => e.code === 'Escape' && setCollapsed(false))
         return () => body.removeEventListener('keyup', () => setCollapsed)
     }, [setCollapsed])
+
+    const [status, setStatus] = useState('close')
+    const location = useLocation()
+
+    useEffect(() => {
+        setStatus('close')
+    }, [location]);
+
     return (
-        <SideBarLeft toggle={collapsed} width={collapsed ? '40%' : '100%'} >
+        <SideBarLeft toggle={collapsed} collapsed={collapsed} >
+            <LeftSection />
             <BoxSideBar>
                 <Content>
-                    <BoxTitleNavBar title='Esc para abrir menu' toggle={collapsed} display={collapsed ? 'block' : 'flex'}>
+                    <BoxTitleNavBar title='Esc para abrir menu' toggle={collapsed} collapsed={collapsed} >
                         <Name>NotePlus</Name>
-                        <ButtonMenu onClick={toggle}> <IconMenuBurger color={BGColor} size='30px' /></ButtonMenu>
+                        <ButtonMenu onClick={toggle}>
+                            <ContainerBurger>
+                                <div
+                                    className="BurgerMenu__container"
+                                    role="button"
+                                    onClick={() => { setStatus(status === 'open' ? 'close' : 'open') }}
+                                >
+                                    <span className={status}></span>
+                                    <span className={status}></span>
+                                    <span className={status}></span>
+                                </div>
+                            </ContainerBurger>
+                        </ButtonMenu>
                     </BoxTitleNavBar>
-                    <ContainerBoxUser width={collapsed ? '10%' : '100%'} onClick={setModal}>
-                        <ContainerUserImg display={collapsed ? 'none' : 'flex'}>
+                    <ContainerBoxUser onClick={setModal}>
+                        <ContainerUserImg collapsed={collapsed} >
                             <IconUser size='20px' />
                             <span>Bienvenido</span>
                             <IconArrowBottom size='10px' color={PLColor} />
@@ -50,22 +73,22 @@ export const SideBar = () => {
                                 <span>Home</span>
                             </LinkOption>
                         </Options>
-                        <Options label='Juegos' active={active === 2} handleClick={() => handleClick(2)} icon={<IconArrowBottom size='10px' color={PLColor} />} iconTwo={<IconTask size='25px' color={PLColor} />}>
+                        <Options label='Juegos' active={active === 3} handleClick={() => handleClick(3)} icon={<IconArrowBottom size='10px' color={PLColor} />} iconTwo={<IconTask size='25px' color={PLColor} />}>
                             <LinkOption to='/'>
                                 <span>Home</span>
                             </LinkOption>
                         </Options>
-                        <Options label='Progreso' active={active === 3} handleClick={() => handleClick(3)} icon={<IconArrowBottom size='10px' color={PLColor} />} iconTwo={<IconGraphic size='25px' color={PLColor} />}>
+                        <Options label='Progreso' active={active === 4} handleClick={() => handleClick(4)} icon={<IconArrowBottom size='10px' color={PLColor} />} iconTwo={<IconGraphic size='25px' color={PLColor} />}>
                             <LinkOption to='/'>
                                 <span>Home</span>
                             </LinkOption>
                         </Options>
-                        <Options label='Basura' active={active === 4} handleClick={() => handleClick(4)} icon={<IconArrowBottom size='10px' color={PLColor} />} iconTwo={<IconBasura size='25px' color={PLColor} />}>
+                        <Options label='Basura' active={active === 5} handleClick={() => handleClick(5)} icon={<IconArrowBottom size='10px' color={PLColor} />} iconTwo={<IconBasura size='25px' color={PLColor} />}>
                             <LinkOption to='/'>
                                 <span>Mis Libros</span>
                             </LinkOption>
                         </Options>
-                        <Options label='Cerrar sesión' active={active === 4} handleClick={() => handleClick(4)} icon={<IconArrowBottom size='10px' color={PLColor} />} iconTwo={<IconCloseSesion size='25px' color={PLColor} />}>
+                        <Options label='Cerrar sesión' active={active === 6} handleClick={() => handleClick(6)} icon={<IconArrowBottom size='10px' color={PLColor} />} iconTwo={<IconCloseSesion size='25px' color={PLColor} />}>
                             <LinkOption to='/'>
                                 <span>Mis Libros</span>
                             </LinkOption>

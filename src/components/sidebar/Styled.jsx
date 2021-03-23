@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 import { SEGColor, BGColor } from '../../assets/colors'
 export const Span = styled.span`
@@ -19,15 +19,50 @@ export const LinkOption = styled(Link)`
     white-space: nowrap;
     margin: 0 30px;
 `
+export const ContainerBurger = styled.div`
+    .BurgerMenu__container {
+    display: flex;
+    flex-direction: column;    
+    span {
+      background-color: ${ BGColor };
+      width: 25px;
+      height: 1px;
+      margin: 4px;
+      border-radius: 1px;
+      transition: all .1s ease-out;
+    }
+    .open:nth-child(1) {
+      transform: rotate(45deg) translateY(4px) translateX(6px);
+
+    }
+    .open:nth-child(2) {
+      opacity: 0;
+    }
+    .open:nth-child(3) {
+      transform: rotate(-45deg) translateY(-7px) translateX(9px);
+    }
+    .close:nth-child(1) {
+      transform: rotate(0) translateY(0);
+    }
+    .close:nth-child(2) {
+      opacity: 1;
+    }
+    .close:nth-child(3) {
+      transform: rotate(0) translateY(0);
+    }
+}
+`
 export const SideBarLeft = styled.div`
     justify-self: center;
     transition: .3s;
     position: relative;
-    ${ ({ width }) => width && css`width: ${ width };` }
     @media( max-width: 1200px ){
         display: flex;
         justify-content: space-between;
         flex-direction: row;
+    }
+    @media( min-width: 1200px ){
+        width: ${ ({ collapsed })=> collapsed ? '40%' : '100%' };
     }
 `
 export const ContainerOptions = styled.div`
@@ -39,7 +74,8 @@ export const ContainerOptions = styled.div`
     width: 90%;
 }
 
-@media( max-width: 1200px ){
+    @media( max-width: 1200px ){
+        display: none;
     }
 `
 export const ContainerUserImg = styled.div`
@@ -47,16 +83,20 @@ export const ContainerUserImg = styled.div`
     justify-content: space-between;
     align-items: center;
     & > span{
-        ${ ({ display }) => display && css`display: ${ display };` }
+        @media( min-width: 1200px ){
+        display: ${ ({ collapsed })=> collapsed ? 'none' : 'flex' };
+    }
     }
 `
 export const ButtonMenu = styled.button`
     background-color: transparent;
 `
 export const Content = styled.div`
-    height: 100%;
     width: 90%;
     margin: auto;
+    @media( max-width: 1200px ){
+        width: 100%;
+    }
 `
 export const BoxSideBar = styled.aside`
     top: 0;
@@ -67,6 +107,10 @@ export const BoxSideBar = styled.aside`
     background: ${ SEGColor };
     width: 100%;
     border-radius: 10px;
+    @media( max-width: 1200px ){
+        height: min-content;
+        border-radius: 0px;
+    }
 `
 export const MenuLeft = styled.button`
     width: 100%;
@@ -134,11 +178,19 @@ export const BoxTitleNavBar = styled.div`
     background: ${ SEGColor };
     padding: 30px 0px;
     justify-content: space-between;
-    ${ ({ display }) => display && css`display: ${ display };` }
+    @media( min-width: 1200px ){
+        display: ${ ({ collapsed })=> collapsed ? 'block' : 'flex' };
+    }
+    @media( max-width: 1200px ){
+        display: flex;
+        padding: 10px;
+        border-radius: 0px; 
+    }
 `
 export const Name = styled.h1`
     color: #FFFFFF;
     font-size: 1.25em;
+    align-self: center;
 `
 export const ContainerBoxUser = styled.button`
     width: 100%;
@@ -161,4 +213,10 @@ export const ContainerBoxUser = styled.button`
     border: none;
     align-items: center;
     padding: 15px;
+    @media( min-width: 1200px ){
+        width: ${ ({ collapsed })=> collapsed ? '40%' : '100%' };
+    }
+    @media( max-width: 1200px ){
+        display: none;
+    }
 `
