@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components'
-import { BGAColor, PColor, PLAColor, SEGColor } from '../../../assets/colors'
+import { BGAColor, BGColor, PColor, PLAColor, PSColor, SEGColor } from '../../assets/colors'
 // import { BColor, PColor } from '../../../assets/colors'
 
 // requeriments
@@ -38,6 +38,13 @@ export const Main = styled.main`
     background-color: ${ BGAColor };
     overflow: hidden;
     height: 100%;
+`
+export const Footer = styled.footer`
+    width: 100%;
+    background-color: ${ BGColor };
+    overflow: hidden;
+    height: 100vh;
+    display: flex;
 `
 export const Row = styled.div`
     display: flex;
@@ -97,6 +104,7 @@ export const MenuHeader = styled.div`
     justify-content: space-between;
     align-items: center;
     margin: 0 auto;
+    background-color: ${ PSColor }
 `
 export const Menu = styled.div`
     justify-content: right;

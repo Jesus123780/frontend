@@ -2,7 +2,7 @@ import React from 'react'
 import { HeaderC } from '../header'
 import { Body } from './styled'
 
-export const Layout = ({ children }) => {
+export const LayoutMain = ({ children }) => {
     return (
         <Body>
             <HeaderC />
