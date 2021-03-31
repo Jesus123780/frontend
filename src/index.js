@@ -5,6 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { ApolloProvider, ApolloClient, InMemoryCache } from '@apollo/client'
 import { URL_BASE_GRAPHQL } from './api';
+import Context from './Context';
 
 // Apollo config
 const client = new ApolloClient({
@@ -13,11 +14,13 @@ const client = new ApolloClient({
 })
 
 ReactDOM.render(
-    <React.StrictMode>
-        <ApolloProvider client={client}>
-            <App />
-        </ApolloProvider>
-    </React.StrictMode>,
+    <Context.Provider>
+        <React.StrictMode>
+            <ApolloProvider client={client}>
+                <App />
+            </ApolloProvider>
+        </React.StrictMode>
+    </Context.Provider>,
     document.getElementById('root')
 );
 

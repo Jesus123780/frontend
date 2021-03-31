@@ -5,6 +5,7 @@ import { IconArrowBottom, IconUser, IconTask, IconBasura, IconGraphic, IconClose
 import { PLColor } from '../../assets/colors';
 import { SubMenu } from '../showSubMenu';
 import { useLocation } from 'react-router';
+import LeftSection from '../LeftSection';
 export const SideBar = () => {
     const [active, setActive] = useState(false)
     const [modal, setModal] = useState(false)
@@ -26,6 +27,7 @@ export const SideBar = () => {
 
     return (
         <SideBarLeft toggle={collapsed} collapsed={collapsed} >
+            <LeftSection />
             <BoxSideBar>
                 <Content>
                     <BoxTitleNavBar title='Esc para abrir menu' toggle={collapsed} collapsed={collapsed} >

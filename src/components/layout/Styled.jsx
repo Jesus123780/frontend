@@ -1,6 +1,5 @@
 import styled, { css } from 'styled-components'
 import { BGAColor, BGColor, PColor, PLAColor, PSColor, SEGColor } from '../../assets/colors'
-// import { BColor, PColor } from '../../../assets/colors'
 
 // requeriments
 export const Container = styled.div`

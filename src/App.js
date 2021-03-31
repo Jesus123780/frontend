@@ -5,6 +5,9 @@ import Back from './components/layout/back'
 import { LayoutMain } from './components/aside'
 import { Dashboard } from './components/dashboard'
 import { Books } from './components/books/index'
+import { SectionInfo } from './components/Doctor/sectionInfo';
+import ContextLayout from './Context';
+
 const AppRoute = ({ component: Component, layout: Layout, ...rest }) => (
     <Route {...rest} render={props => (
         <Layout><Component {...props} /></Layout>
@@ -13,10 +16,14 @@ const AppRoute = ({ component: Component, layout: Layout, ...rest }) => (
 function App() {
     return (
         <Router>
-            {/* LayoutPrincipal */}
-            <AppRoute path='/' exact layout={LayoutMain} component={Books} />
-            {/* Layout Secundario */}
-            <AppRoute path='/dashboatd' exact layout={Back} component={Dashboard} />
+            <ContextLayout.Consumer>
+                { ({ error }) => <>
+                    <AppRoute error={error} path='/' exact layout={LayoutMain} component={Books} />
+                    <AppRoute error={error} path='/dashboard' exact layout={Back} component={Dashboard} />
+                    <AppRoute error={error} path='/info' exact layout={Back} component={SectionInfo} />
+                </>
+                }
+            </ContextLayout.Consumer>
         </Router>
     );
 }
