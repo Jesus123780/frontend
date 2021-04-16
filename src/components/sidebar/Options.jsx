@@ -30,6 +30,7 @@ const Options = ({ index, active, children, label, path, handleClick, icon, icon
                 </i>
             </Row>
             <OptionMenu active={active} ref={refMenu}>
+                <div />
                 {children}
             </OptionMenu>
         </MenuLeft>

@@ -1,76 +1,76 @@
 import React, { useState, useRef } from 'react';
 import styled, { css } from 'styled-components';
-import { BGColor, PColor } from '../../../assets/colors';
+import { BGColor, PColor } from '../../assets/colors';
 
 export const ButtonHook = ({ children, border, padding, position, margin, top, right, left, width, display, justify, HoverEfect, Ripple, lineHeight, textAlign, cursor, weight, fontsize, shadow, onClick, radius, bgColor, alignItems }) => {
-  const [state, setState] = useState('');
-  const [rippleStyle, setRippleStyle] = useState({});
-  let timerId;
-  const ripple = useRef(null);
-  const button = useRef(null);
+    const [state, setState] = useState('');
+    const [rippleStyle, setRippleStyle] = useState({});
+    let timerId;
+    const ripple = useRef(null);
+    const button = useRef(null);
 
-  const onMouseDown = e => {
-    setState('');
-    clearTimeout(timerId);
-    const size = button.current.offsetWidth;
-    const pos = button.current.getBoundingClientRect();
-    const x = e.pageX - pos.left - size;
-    const y = e.pageY - pos.top - size;
+    const onMouseDown = e => {
+        setState('');
+        clearTimeout(timerId);
+        const size = button.current.offsetWidth;
+        const pos = button.current.getBoundingClientRect();
+        const x = e.pageX - pos.left - size;
+        const y = e.pageY - pos.top - size;
 
-    const newRippleStyle = {
-      top: `${y}px`,
-      left: `${x}px`,
-      width: `${size * 2}px`,
-      height: `${size * 2}px`
+        const newRippleStyle = {
+            top: `${ y }px`,
+            left: `${ x }px`,
+            width: `${ size * 2 }px`,
+            height: `${ size * 2 }px`
+        }
+
+        setRippleStyle(newRippleStyle);
+
+        setState('ripple-start ripple-active');
+        timerId = setTimeout(() => {
+            setState('');
+        }, 230)
     }
+    return (
+        <Container border={border} padding={padding} position={position} margin={margin} right={right} top={top} left={left} width={width} justify={justify} HoverEfect={HoverEfect} onClick={onClick} lineHeight={lineHeight} textAlign={textAlign} display={display} shadow={shadow} weight={weight} cursor={cursor} fontsize={fontsize} bgColor={bgColor} radius={radius} alignItems={alignItems} >
 
-    setRippleStyle(newRippleStyle);
+            <button ref={button} onClick={onClick} className="MaterialRippleButton__container" onMouseDown={onMouseDown}>
+                {Ripple && <span ref={ripple} style={rippleStyle} className={`ripple ${ state }`}></span>}
+                {children}
+                {HoverEfect && <svg>
+                    <rect x="0" y="0" fill="none" width="100%" height="100%" />
+                </svg>}
+            </button>
 
-    setState('ripple-start ripple-active');
-    timerId = setTimeout(() => {
-      setState('');
-    }, 230)
-  }
-  return (
-    <Container border={border} padding={padding} position={position} margin={margin} right={right} top={top} left={left} width={width} justify={justify} HoverEfect={HoverEfect} onClick={onClick} lineHeight={lineHeight} textAlign={textAlign} display={display} shadow={shadow} weight={weight} cursor={cursor} fontsize={fontsize} bgColor={bgColor} radius={radius} alignItems={alignItems} >
+        </Container>
 
-      <button ref={button} onClick={onClick} className="MaterialRippleButton__container" onMouseDown={onMouseDown}>
-        {Ripple && <span ref={ripple} style={rippleStyle} className={`ripple ${state}`}></span>}
-        {children}
-        {HoverEfect && <svg>
-          <rect x="0" y="0" fill="none" width="100%" height="100%" />
-        </svg>}
-      </button>
-
-    </Container>
-
-  );
+    );
 };
 
 const Container = styled.div`
   .MaterialRippleButton__container{
-    color: ${({ color }) => color ? color : `${BGColor}`};
-    background-color: ${({ bgColor }) => bgColor ? bgColor : `${PColor}`};
-    border: ${({ border }) => border ? border : 'none'};
-    ${({ radius }) => radius && css`border-radius: ${radius};`}
-    ${({ padding }) => padding && css`padding: ${padding};`}
-    ${({ display }) => display && css`display: ${display};`}
-    ${({ justify }) => justify && css`justify-content: ${justify};`}
-    ${({ width }) => width && css`width: ${width};`}
-    ${({ margin }) => margin && css`margin: ${margin};`}
-    ${({ lineHeight }) => lineHeight && css`line-height: ${lineHeight};`}
-    ${({ textAlign }) => textAlign && css`text-align: ${textAlign};`}
-    ${({ top }) => top && css`top: ${top};`}
-    ${({ fontsize }) => fontsize && css`font-size: ${fontsize};`}
-    ${({ weight }) => weight && css`font-weight: ${weight};`}
-    ${({ shadow }) => shadow && css`box-shadow: ${shadow};`}
-    ${({ left }) => left && css`left: ${left};`}
-    ${({ right }) => right && css`right: ${right};`}
-    ${({ display }) => display && css`display: ${display};`}
-    outline: ${({ outline }) => outline ? outline : 'none'};
-    cursor: ${({ cursor }) => cursor ? cursor : 'pointer'};
-    position: ${({ position }) => position ? position : 'relative'};
-    align-items: ${({ alignItems }) => alignItems ? alignItems : 'center'};
+    color: ${ ({ color }) => color ? color : `${ BGColor }` };
+    background-color: ${ ({ bgColor }) => bgColor ? bgColor : `${ PColor }` };
+    border: ${ ({ border }) => border ? border : 'none' };
+    ${ ({ radius }) => radius && css`border-radius: ${ radius };` }
+    ${ ({ padding }) => padding && css`padding: ${ padding };` }
+    ${ ({ display }) => display && css`display: ${ display };` }
+    ${ ({ justify }) => justify && css`justify-content: ${ justify };` }
+    ${ ({ width }) => width && css`width: ${ width };` }
+    ${ ({ margin }) => margin && css`margin: ${ margin };` }
+    ${ ({ lineHeight }) => lineHeight && css`line-height: ${ lineHeight };` }
+    ${ ({ textAlign }) => textAlign && css`text-align: ${ textAlign };` }
+    ${ ({ top }) => top && css`top: ${ top };` }
+    ${ ({ fontsize }) => fontsize && css`font-size: ${ fontsize };` }
+    ${ ({ weight }) => weight && css`font-weight: ${ weight };` }
+    ${ ({ shadow }) => shadow && css`box-shadow: ${ shadow };` }
+    ${ ({ left }) => left && css`left: ${ left };` }
+    ${ ({ right }) => right && css`right: ${ right };` }
+    ${ ({ display }) => display && css`display: ${ display };` }
+    outline: ${ ({ outline }) => outline ? outline : 'none' };
+    cursor: ${ ({ cursor }) => cursor ? cursor : 'pointer' };
+    position: ${ ({ position }) => position ? position : 'relative' };
+    align-items: ${ ({ alignItems }) => alignItems ? alignItems : 'center' };
     outline: none;
     overflow: hidden;
     font-size: 15px;
@@ -93,7 +93,7 @@ const Container = styled.div`
     .ripple-start{
         transform: scale(2)    
     }
-    ${({ HoverEfect }) => HoverEfect && css`  
+    ${ ({ HoverEfect }) => HoverEfect && css`  
       color: rgb(255, 255, 255);
       cursor: pointer;
       font-size: 16px;
@@ -123,7 +123,7 @@ const Container = styled.div`
         stroke-dashoffset: 48;
         transition: all 1.35s cubic-bezier(0.19, 1, 0.22, 1);
     }
-    `}
+    ` }
 }
 
 `

@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { Link } from 'react-router-dom'
 import { SEGColor, BGColor } from '../../assets/colors'
 export const Span = styled.span`
@@ -6,13 +6,14 @@ export const Span = styled.span`
     font-weight: 500;
     display: block;
     margin-right: 1em;
-    font-size: 14px;
+    /* font-size: 14px; */
+    font-size: calc(14px + (4 - 4) * ((100px - 320px) / (2000 - 5)));
     font-family: Poppins;
 `
 export const LinkOption = styled(Link)`
     display: block;
     text-decoration: none;
-    font-size: 12px;
+    font-size: calc(14px + (4 - 4) * ((100px - 320px) / (2000 - 5)));
     padding: 5px 10px;
     padding-left: 10px;
     text-align: left;
@@ -129,8 +130,8 @@ export const MenuLeft = styled.button`
     transition: .3s;
     overflow: hidden;
     background-color:${ BGColor };
-    border-radius: 15px;
-    margin: 5px; 
+    border-radius: 6px;
+    margin: 2px; 
     border-bottom: 1px solid ${ SEGColor }32;
     & a {
         color: ${ props => props.active ? '#a6b0cf' : '#a6b0cf' };
@@ -159,21 +160,76 @@ export const OptionMenu = styled.div`
     width: 100%;
     display: block;
     width: 100%;
+    position: relative;
     transform: translateY(${ ({ height }) => height }px);
     overflow: hidden;
     padding: 8px 0;
+    & > div {
+        content: '';
+        height: 100%;
+        opacity: 1;
+        width: 3px;
+        background: #e0f3ff;
+        position: absolute;
+        left: 20px;
+        top: 0;
+        border-radius: 15px;
+    }
 `
 export const Box = styled.div`
 `
+export const SubMenu = styled.div`
+    top: 56px;
+    position: absolute;
+    z-index: 99999;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 0 3px rgb(0 0 0 / 50%);
+    border-radius: 5px;
+    transition: all 0.2s ease;
+    max-width: 260px;
+    background-color: ${ BGColor };
+  ${ ({ activeMenu }) => activeMenu
+        ? css`
+                  visibility: visible;
+                  opacity: 1;
+                  margin-top: 0;
+                  transform: translateY(0);
+              `
+        : css`
+                
+                  padding: 0;
+                  margin: 0;
+                  visibility: hidden;
+                  opacity: 0;
+                  transform: translateY(20px);
+              ` }
+              &::before {
+    border: 7px solid  ${ BGColor };
+    box-shadow: -2px 2px 2px -1px rgb(0 0 0 / 10%);
+    content: '';
+    right: 0;
+    position: absolute;
+    top: 2px;
+    transform-origin: 0 0;
+    transform: rotate(
+135deg
+);
+    transform: rotate(
+135deg
+);
+}
+`
 export const SpanItem = styled.span`
 margin: 1px 0;
+font-size: 10px;
     &:hover{
         background-color: #f8f9fa; 
     }
 `
 export const BoxTitleNavBar = styled.div`
     text-align: center;
-    width: 100%;
+    width: 90%;
     border-radius: 10px; 
     background: ${ SEGColor };
     padding: 30px 0px;
@@ -189,7 +245,7 @@ export const BoxTitleNavBar = styled.div`
 `
 export const Name = styled.h1`
     color: #FFFFFF;
-    font-size: 1.25em;
+    font-size: .02.5em;
     align-self: center;
 `
 export const ContainerBoxUser = styled.button`

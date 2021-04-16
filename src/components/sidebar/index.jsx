@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import Options from './Options'
-import { SideBarLeft, BoxSideBar, LinkOption, BoxTitleNavBar, Name, ButtonMenu, Content, ContainerBoxUser, ContainerUserImg, SpanItem, ContainerOptions, ContainerBurger } from './Styled'
+import { SideBarLeft, BoxSideBar, LinkOption, BoxTitleNavBar, Name, ButtonMenu, Content, ContainerBoxUser, SubMenu, ContainerUserImg, SpanItem, ContainerOptions, ContainerBurger } from './Styled'
 import { IconArrowBottom, IconUser, IconTask, IconBasura, IconGraphic, IconCloseSesion } from '../../assets/icons';
 import { PLColor } from '../../assets/colors';
-import { SubMenu } from '../showSubMenu';
 import { useLocation } from 'react-router';
 export const SideBar = () => {
     const [active, setActive] = useState(false)
-    const [modal, setModal] = useState(false)
     const [collapsed, setCollapsed] = useState(false);
     const toggle = () => setCollapsed(!collapsed);
     const handleClick = index => setActive(index === active ? false : index)
@@ -24,6 +22,17 @@ export const SideBar = () => {
         setStatus('close')
     }, [location]);
 
+    const [activeMenu, setActiveMenu] = useState(false)
+
+    const handleActiveClick = e => {
+        e.stopPropagation()
+        setActiveMenu(!activeMenu)
+    }
+    useEffect(() => {
+        const body = document.body
+        body.addEventListener('keyup', e => e.code === 'Escape' && setActiveMenu(false))
+        return () => body.removeEventListener('keyup', () => setActiveMenu)
+    }, [setActiveMenu])
     return (
         <SideBarLeft toggle={collapsed} collapsed={collapsed} >
             <BoxSideBar>
@@ -44,13 +53,13 @@ export const SideBar = () => {
                             </ContainerBurger>
                         </ButtonMenu>
                     </BoxTitleNavBar>
-                    <ContainerBoxUser onClick={setModal}>
+                    <ContainerBoxUser onClick={handleActiveClick}>
                         <ContainerUserImg collapsed={collapsed} >
                             <IconUser size='20px' />
                             <span>Bienvenido</span>
                             <IconArrowBottom size='10px' color={PLColor} />
                         </ContainerUserImg>
-                        <SubMenu title='Registrar nueva tarea' show={modal} onHidde={() => setModal(false)} height='auto' hiddeOnConfirm={false} timeOut={0} footer={false} header={true}>
+                        <SubMenu activeMenu={activeMenu}>
                             <SpanItem>Perfil</SpanItem>
                             <SpanItem>Editar Perfil</SpanItem>
                             <SpanItem>Configurar Cuenta</SpanItem>
