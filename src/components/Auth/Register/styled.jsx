@@ -17,11 +17,8 @@ export const Body = styled.div`
     } 
 `
 export const Container = styled.div`
-    margin: auto;
+    height: 100vh;
     width: 100%;
-    display: flex;
-    justify-items: center;
-    align-items: center;
     background-color: #fff;
     @media( max-width: 1200px ){
         display: flex;
@@ -29,24 +26,11 @@ export const Container = styled.div`
         flex-direction: column;
     } 
 `
-export const ContainerForm = styled.div`
+export const Form = styled.form`
     width: 50%;
     overflow: hidden;
+
     background-color: red;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0 10px 0 auto;  
-    flex-direction: column;
-    @media( max-width: 1200px ){
-        display: flex;
-        padding: 0px;
-        flex-direction: column;
-    } 
-`
-export const BtnFacebook = styled.button`
-    background-color: blue;
     @media( max-width: 1200px ){
         display: flex;
         padding: 0px;
@@ -57,15 +41,17 @@ export const Register = styled.div`
     width: 100%;
     justify-items: center;
     padding: 30px;
-    width: 100%;
-    max-width: 100%;
-    height: 90vh;
-    top: 8px;
-    bottom: 0;
-    left: 0;
-    transform: ${ props => props.active ? 'translateX(0px)' : 'translateX(1000px)' };
-    margin-top: 83px;
-    transition: all 0.9s ease;
+    position: fixed;
+        width: 100%;
+        max-width: 100%;
+        height: 90vh;
+        top: 8px;
+        bottom: 0;
+        left: 0;
+        transform: ${ props => props.active ? 'translateX(0px)' : 'translateX(900px)' };
+        transition: all 0.9s ease;
+        margin-top: 83px;
+        transition: all 0.9s ease;
     @media( max-width: 1200px ){
         display: flex;
         padding: 0px;

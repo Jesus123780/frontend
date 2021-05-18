@@ -23,17 +23,19 @@ const fadeout = keyframes`
 `
 
 const fadeInTop = keyframes`
-  from {
-    opacity: 0;
-    -webkit-transform: translate3d(0, 100%, 0);
-    transform: translate3d(0, 100%, 0);
-  }
-
-  to {
-    opacity: 1;
-    -webkit-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
-  }
+    from {
+      opacity: 0;
+      top: -10%;
+      left: 50%;
+      transform: translateY(-10%);
+    }
+  
+    to {
+      opacity: 1;
+      top: 15%;
+      left: 50%;
+      transform: translateY(-15%);
+    }
 
 `
 
@@ -68,7 +70,7 @@ export const Container = styled.div`
     right: 0;
     width: 100%;
     height: 100%;
-    z-index: 9999;
+    z-index: 999999;
     opacity: 1;
     ${ ({ show, state }) => {
         if (show && state) return css`animation: ${ fadeIn } .4s linear;`
@@ -98,10 +100,10 @@ export const Modal = styled.div`
     min-width: 400px;
     max-width: max-content;
     height: auto;
-    border-radius: .3rem;
+    border-radius: ${ ({ borderRadius }) => borderRadius };
     border: 1px solid rgba(0,0,0,.2);
-    z-index: 999;
-    ${ ({ state }) => state ? css`animation: ${ fadeInTop } .4s ease-in;` : css`animation: ${ fadeOutTop } .4s ease-out;` }
+    z-index: 9999999;
+    ${ ({ state }) => state ? css`animation: ${ fadeInTop } .4s forwards;` : css`animation: ${ fadeOutTop } .4s forwards;` }
 `
 
 export const ModalHeader = styled.div`
@@ -120,11 +122,17 @@ export const ModalTitle = styled.h4`
 `
 
 export const BtnClose = styled.button`
+    ${ ({ fixed }) => fixed && css`
+        position: absolute;
+        right: 6px;
+        top: 6px;
+    ` }
     background-color: transparent;
     border: 0;
     font-size: 1.5rem;
     font-weight: 700;
     line-height: 1;
+    z-index: 999999;
     color: #898989;
     text-shadow: 0 1px 0 #fff;
     outline: none;

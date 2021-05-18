@@ -22,7 +22,7 @@ function App() {
                     <AppRoute error={error} path='/' exact layout={LayoutMain} component={Books} />
                     <AppRoute error={error} path='/dashboard' exact layout={Back} component={Dashboard} />
                     <AppRoute error={error} path='/info' exact layout={Back} component={SectionInfo} />
-                    <AppRoute error={error} path='/auth' exact layout={Back} component={Auth} />
+                    <AppRoute error={error} path='/login' exact layout={Back} component={Auth} />
                 </>
                 }
             </ContextLayout.Consumer>

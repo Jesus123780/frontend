@@ -2,8 +2,7 @@ import { gql, useLazyQuery, useMutation, useQuery } from '@apollo/client';
 import React, { useState } from 'react'
 import { GET_COURSES } from '../../gql/cursos';
 import { GET_BOOKS } from '../../gql/libros';
-import { AwesomeModal } from '../awesome-modal';
-import { ButtonHook } from '../ButtonRipple';
+import { AwesomeModal } from '../AwesomeModal';
 import { ShadowCard } from '../ShadowCard'
 import { Container, Card } from './styled';
 export const Books = () => {
@@ -68,7 +67,6 @@ export const Books = () => {
                     <input type="file" onChange={handleFileChange} name="" id="" />
                 </ShadowCard>
             </Card>
-            <ButtonHook HoverEfect padding='20px'>Hola</ButtonHook>
         </Container>
     )
 }
