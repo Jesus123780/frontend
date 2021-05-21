@@ -6,19 +6,16 @@ const Provider = ({ children }) => {
     const [error, setError] = useState({})
 
     useEffect(() => {
-        !!error?.message && setTimeout(() => setError(''), error.duration || 7000)
+        !!error?.message &&
+            setTimeout(() => setError(''), error.duration || 7000)
     }, [error])
 
     const value = {
         error,
-        setAlertBox: err => setError(err),
+        setAlertBox: err => setError(err)
     }
 
-    return (
-        <Context.Provider value={value}>
-            {children}
-        </Context.Provider>
-    )
+    return <Context.Provider value={value}>{children}</Context.Provider>
 }
 
 export default {

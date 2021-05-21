@@ -5,8 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { ApolloProvider, ApolloClient, InMemoryCache } from '@apollo/client'
 import { URL_BASE_GRAPHQL } from './api';
-import Context from './Context';
-
+import Context from './Context'
 // Apollo config
 const client = new ApolloClient({
     uri: URL_BASE_GRAPHQL,
