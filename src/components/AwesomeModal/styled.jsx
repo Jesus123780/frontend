@@ -63,7 +63,7 @@ export const Container = styled.div`
         else if (!show && !state) return 'none';
     } };
     position: fixed;
-    background: rgba(0,0,0,.4);
+    background-color: rgb(0 0 0 / 42%);
     top: 0;
     left: 0;
     bottom: 0;

@@ -1,8 +1,6 @@
 import styled from 'styled-components';
 
 export const Header = styled.div`
-    position: -webkit-sticky;
-    position: sticky;
     flex-direction: column;
     width: 100vw;
     height: 80px;
@@ -23,7 +21,7 @@ export const Content = styled.div`
     align-items: center;
     padding: 20px 0;
     width: 100%;
-    max-width: 1366px !important;
+    max-width: 1200px !important;
     margin: auto;
     padding: 0 30px;
     @media only screen and (min-width: 960px){

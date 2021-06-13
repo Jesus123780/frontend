@@ -5,7 +5,8 @@ export const SliderContainer = styled.div`
   background: #fafafa;
   overflow: hidden;
   width: 100%;
-  height: ${ props => props.height || '50px' };
+  height: ${ props => props.height || 'auto' };
+
 `;
 
 export const SliderWrapper = styled.div`
@@ -13,15 +14,17 @@ export const SliderWrapper = styled.div`
   left: 0;
   width: 100%;
   display: flex;
+  flex-direction: row;
   flex-wrap: wrap;
+  width: ${ props => `${ props.width }px` || '100%' };
+
 `;
 
 export const SliderItem = styled.div`
   position: relative;
-  height: auto;
   width: ${ props => `${ props.width }px` || '100%' };
-  border: 1px solid #000;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   font-size: 40px;
@@ -34,51 +37,46 @@ export const Navigation = styled.ul`
   padding: 0;
   left: 0;
   display: flex;
+  justify-content: center;
 `;
 
 export const NavigationItem = styled.li`
-font-size: 0;
-    line-height: 0;
-    display: block;
-    width: 20px;
+    width: 5px;
     height: 5px;
-    padding: 0;
+    border-radius: 50%;
     cursor: pointer;
     color: transparent;
     border: 0;
     outline: none;
-    margin-left: 8px;
-    background-color: #C0C0C0;
-
+    transition: .5s ease;
+    margin-left: 20px;
+    background-color: #c0c0c0f6;
   ${ props => props.active &&
     css`
-        background-color: #0de0fe;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background-color: #ffffff;
     ` };
 `;
 
 export const Control = styled.button`
     position: absolute;
     top: 50%;
-    display: flex;
     align-items:center;
-    display: block;
     width: 40px;
     height: 40px;
     padding: 0;
     transform: translate(0, -50%);
     box-shadow: 1px 6px 14px rgb(0 0 0 / 20%);
-    border-radius: 100%;
     cursor: pointer;
     transition: all 0.2s ease;
     border: none;
     outline: none;
     justify-content: center;
     display: flex;
-    &:hover{
-        background-color: #060707;
-        color: #fff;
-        opacity: 1;
-    }
+    border-radius: 4px;
+    height: 80px;
     &:disabled{
         opacity: 59%;
         background-color:#b4b4b4;
@@ -87,13 +85,26 @@ export const Control = styled.button`
 
 export const ControlLeft = styled(Control)`
   left: 0;
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+
 `;
 export const ControlRight = styled(Control)`
   right: 0;
+  border-bottom-right-radius: 0;
+  border-top-right-radius: 0;
 `;
 
 export const BigElement = styled.div`
   min-height: 1000px;
   background: #61dafb;
   width: 30px;
+`;
+export const Image = styled.img`
+  height: auto;
+  min-height: auto;
+  max-width: 1600px !important;
+  flex: 0 0 auto;
+  object-fit: cover;
+  
 `;

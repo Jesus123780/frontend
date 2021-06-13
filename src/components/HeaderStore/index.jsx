@@ -13,7 +13,6 @@ export const HeaderC = () => {
     const handleChange = (e, error) => {
         setValues({ ...values, [e.target.name]: e.target.value })
         setErrors({ ...errors, [e.target.name]: error })
-        console.log(values)
     }
     return (
         <Header>
@@ -25,7 +24,7 @@ export const HeaderC = () => {
                 </div>
                 <div>
                     <ContentInput>
-                        <InputHooksSearcher title='Busca tus productos' name='cliNam' value={''} onChange={handleChange} type='text' range={{ min: 0, max: 20 }} />
+                        <InputHooksSearcher title='Busca tus productos' name='cliNam' value={values?.cliNam} onChange={handleChange} type='text' range={{ min: 0, max: 20 }} />
                     </ContentInput>
                 </div>
                 <div>

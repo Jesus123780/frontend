@@ -50,6 +50,13 @@ export const AwesomeModal = ({
         if (hideOnConfirm) hide()
         onConfirm()
     }
+    useEffect(() => {
+        if (show) {
+            document.body.style.overflow = 'hidden'
+        } else {
+            document.body.style.overflow = 'auto'
+        }
+    }, [show])
     return (
         <Container show={show} state={state} onMouseDown={onBackdropHide}>
             <Wrapper onMouseDown={onBackdropHide}>

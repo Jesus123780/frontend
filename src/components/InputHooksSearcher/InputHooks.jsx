@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import PropTypes from 'prop-types'
-import { IconSearch } from '../../assets/icons'
+import { IconSearch } from '../../assets/icons/icons'
 import { BoxInput, InputV, Tooltip, ButtonFocus } from './styled'
 import { isEmail, isNull, isPassword, onlyLetters, passwordConfirm, rangeLength } from '../../utils'
 
@@ -29,8 +29,6 @@ const InputHooksSearcher = ({
 }) => {
     // Declarando el estado
     const [errors, setError] = useState(error)
-    const [values] = useState(value)
-    console.log(values)
     const [message, setMessage] = useState('El campo no debe estar vacío')
     // Función para activar el error
     const errorFunc = (e, v, m) => {

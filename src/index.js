@@ -6,17 +6,21 @@ import reportWebVitals from './reportWebVitals';
 import { ApolloProvider, ApolloClient, InMemoryCache } from '@apollo/client'
 import { URL_BASE_GRAPHQL } from './api';
 import Context from './Context'
+import { Maintenance } from './components/Maintenance'
 // Apollo config
 const client = new ApolloClient({
     uri: URL_BASE_GRAPHQL,
     cache: new InMemoryCache()
 })
+const production = true
 
 ReactDOM.render(
     <Context.Provider>
         <React.StrictMode>
             <ApolloProvider client={client}>
-                <App />
+                {!production ? ReactDOM.createPortal(<Maintenance />,
+                    document.querySelector('#portal')
+                ): <App /> }
             </ApolloProvider>
         </React.StrictMode>
     </Context.Provider>,
