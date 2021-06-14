@@ -1,35 +1,16 @@
 import React from 'react'
-import PropTypes from 'prop-types'
-import { Container, Head, Main, MenuHeader, Menu, OptionBox, Text, ChildrenBox, MenuButton } from './Styled'
+import { HeaderC } from '../HeaderStore'
+import { Footer } from '../Footer'
 
-const Front = ({ children }) => {
-    return (
-        <Container>
-            <Main>
-                <Head>
-                    <MenuHeader>
-                        <MenuButton>
-                        </MenuButton>
-                        <Menu>
-                            <OptionBox>
-                                <Text>Home</Text>
-                            </OptionBox>
-                            <OptionBox margin='20px 0'>
-                                <Text>sdasasda</Text>
-                            </OptionBox>
-                        </Menu>
-                    </MenuHeader>
-                </Head>
-                <ChildrenBox>
-                    {children}
-                </ChildrenBox>
-            </Main>
-        </Container>
+export const Layout = props => {
+    return (<>
+        <HeaderC />
+        <main style={{ backgroundColor: '#ffffff', height: '100%' }}>
+            {props?.children}
+        </main>
+        <Footer />
+
+    </>
     )
 }
-
-Front.propTypes = {
-    onClick: PropTypes.func
-}
-
-export default Front
+// use useLazyQuery se ejecuta cuando espera una acción

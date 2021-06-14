@@ -4,7 +4,6 @@ import { IconArrowLeft, IconArrowRight } from '../../../assets/icons/icons'
 import { PColor } from '../../../assets/colors';
 export const CustomSlider = props => {
     const { state, dispatch } = props
-    console.log(props)
     function useWindowWidth() {
         const [width, setWidth] = useState(window.innerWidth);
         useEffect(() => {

@@ -1,8 +1,5 @@
 import React, { useReducer } from 'react'
-import { HeaderC } from '../HeaderStore'
-import { Footer } from '../Footer'
 import { CustomSlider } from './CustomSlider'
-// import { PaymentData } from '../paymentData'
 import { PaymentData } from '../BannerPayMethods'
 import styled from 'styled-components'
 
@@ -49,17 +46,11 @@ export const Index = () => {
     // const price = 120000645645
     return (
         <>
-            <HeaderC />
-            <main style={{ backgroundColor: '#e9e9e9e3' }}>
-                <CustomSlider state={state} dispatch={dispatch}>
-                </CustomSlider>
-                <Container>
-                    {/* <PaymentData /> */}
-                    <PaymentData />
-                    {/* <span bold>{price && `$ ${ numberFormat(price) }` } </span> */}
-                </Container>
-            </main>
-            <Footer />
+            <CustomSlider state={state} dispatch={dispatch}>
+            </CustomSlider>
+            <Container>
+                <PaymentData />
+            </Container>
         </>
     )
 }
