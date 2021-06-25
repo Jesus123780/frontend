@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-// import LogoImage from '../../assets/'
 import { PColor } from '../../assets/colors'
 import InputHooksSearcher from '../InputHooksSearcher/InputHooks'
-import { IconEnterLocation, IconLogo } from '../../assets/icons/icons'
+import { IconLogo } from '../../assets/icons/icons'
 import { CartShop } from '../CartShop'
-import { Header, Content, Text, ContentInput } from './styled'
+import { EnterLocation } from '../LocationUser'
+import { Header, Content, ContentInput } from './styled'
 
 export const HeaderC = () => {
     const [values, setValues] = useState({})
@@ -28,9 +28,7 @@ export const HeaderC = () => {
                     </ContentInput>
                 </div>
                 <div>
-                    <Text>Entregar en...
-                        <IconEnterLocation size='10px' color={PColor} />
-                    </Text>
+                    <EnterLocation />
                 </div>
                 <CartShop />
             </Content>

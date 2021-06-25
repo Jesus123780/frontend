@@ -1,10 +1,10 @@
 import React from 'react'
-import { HeaderC } from '../HeaderStore'
+import { HeaderC as Header } from '../HeaderStore'
 import { Footer } from '../Footer'
 
 export const Layout = props => {
     return (<>
-        <HeaderC />
+        <Header />
         <main style={{ backgroundColor: '#ffffff', height: '100%' }}>
             {props?.children}
         </main>

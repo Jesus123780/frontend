@@ -19,22 +19,11 @@ export const Content = styled.div`
     flex-grow: 1;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 0;
     width: 100%;
     max-width: 1200px !important;
     margin: auto;
     padding: 0 30px;
     @media only screen and (min-width: 960px){
-        padding: 0 20px 0 30px;
-    }
-`
-
-export const Text = styled.i`
-    display: flex;
-    flex-grow: 1;
-    flex-direction: column;
-    @media only screen and (min-width: 960px){
-        padding: 0 20px 0 30px;
     }
 `
 export const ContentInput = styled.div`

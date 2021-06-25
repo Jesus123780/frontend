@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { BGAColor } from '../../assets/colors';
+import { BGColor } from '../../assets/colors';
 
 export const Content = styled.div`
     display: flex;
@@ -12,8 +12,20 @@ export const Content = styled.div`
 export const Button = styled.button`
     margin: 0 0 0 30px;
     position: relative;
-    background-color:  transparent;
+    cursor: pointer;
     z-index: 999;
+    background-color:  transparent;
+    ${ props => props.space &&css`
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        margin: 0;
+        & > span {
+            font-family: PFont-Light;
+            font-size: 14px;
+            color: #000 };
+        }
+    ` }
     @media only screen and (min-width: 960px){
     }
 `
@@ -22,15 +34,18 @@ export const FloatingBox = styled.div`
     width: 100%;
     border-radius: 10px;
     top: 45px;
-    right: 215px;
+    right: 345px;
     z-index: 99999;
     display: flex;
     flex-direction: column;
     box-shadow: 0px 0px 1px 0px rgb(0 0 0 / 30%);
     border-radius: 5px;
     transition: all 0.2s ease;
-    background-color: ${ BGAColor };
+    background-color: ${ BGColor };
     padding: 10px;
+    box-shadow: 0 4px 8px rgb(0 0 0 / 10%);
+    cursor: pointer;
+    
   ${ ({ show }) => show
         ? css`
                   visibility: visible;
@@ -50,7 +65,8 @@ export const FloatingBox = styled.div`
 export const FloatingBoxTwo = styled(FloatingBox)`
     margin: 0 0 0 30px;
     right: 90px;
-
+    overflow: hidden;
+    width: 290px;
     @media only screen and (min-width: 960px){
     }
   

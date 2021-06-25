@@ -24,7 +24,7 @@ export const IconShopping = ({ style = {}, size, color }) => <svg fill={color} s
 export const IconDocument = ({ style = {}, size }) => <svg x='0px' y='0px' viewBox="0 0 25.748 36.379" style={style} width={size} height={size}></svg>
 
 /* Icono de Buscar */
-export const IconSearch = (/* { style = {}, size, color, secColor } */) => <svg id="Capa_1" data-name="Capa 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16.39 16.23"><circle fill="none" stroke='#ea1d2c' cx="6.91" cy="6.91" r="6.41"/><rect fill="none" strokeMiterlimit='10' stroke='#ea1d2c' x="-39.59" y="7.49" width="5.71" height="0.54" rx="0.22" transform="translate(45.89 33.02) rotate(42.94)"/></svg>
+export const IconSearch = ({ style = {}, size, color }) => <svg style={style} width={size} height={size} fill={color ? color : '#ea1d2c'} id="Capa_1" data-name="Capa 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16.39 16.23"><circle fill="none" stroke={color ? color : '#ea1d2c'} cx="6.91" cy="6.91" r="6.41"/><rect fill="none" strokeMiterlimit='10' stroke={color? color : '#ea1d2c'} x="-39.59" y="7.49" width="5.71" height="0.54" rx="0.22" transform="translate(45.89 33.02) rotate(42.94)"/></svg>
 
 /* Icono de Facebook */
 export const Facebook = ({ style = {}, size, color }) =><svg viewBox="0 0 48 48" fill={color} style={style} width={size} height={size} xmlns="http://www.w3.org/2000/svg"><path d="M27.629 47V23.997h6.509L35 16.07h-7.371l.011-3.967c0-2.067.201-3.175 3.245-3.175h4.069V1h-6.51c-7.818 0-10.57 3.845-10.57 10.312v4.76H13v7.926h4.874V47h9.755z"></path></svg>
@@ -37,3 +37,7 @@ export const IconInstagram = ({ style = {}, size, color }) =><svg viewBox="0 0 4
 
 /* Icono de Youtube */
 export const IconYoutube = ({ style = {}, size, color }) =><svg viewBox="0 0 48 48" fill={color} style={style} width={size} height={size} xmlns="http://www.w3.org/2000/svg"><path d="M47 12.4A6 6 0 0 0 42.8 8C39 7 24 7 24 7S9 7 5.2 8A6 6 0 0 0 1 12.4c-1 3.8-1 11.8-1 11.8s0 8 1 12a6 6 0 0 0 4.2 4.3c3.8 1 18.8 1 18.8 1s15 0 18.8-1A6 6 0 0 0 47 36c1-3.8 1-11.9 1-11.9s0-8-1-11.8z"></path><path fill='#fff' d="M19.5 32.5v-15l12 7.5-12 7.5z"></path></svg>
+// Icon de Arrow
+export const IconArrowBottom = ({ style = {}, color, size }) => <svg height={size} width={size} color={color} style={style} version="1.1" viewBox="0 0 129 129" >
+    <path d="Mm121.3,34.6c-1.6-1.6-4.2-1.6-5.8,0l-51,51.1-51.1-51.1c-1.6-1.6-4.2-1.6-5.8,0-1.6,1.6-1.6,4.2 0,5.8l53.9,53.9c0.8,0.8 1.8,1.2 2.9,1.2 1,0 2.1-0.4 2.9-1.2l53.9-53.9c1.7-1.6 1.7-4.2 0.1-5.8z" />
+</svg>

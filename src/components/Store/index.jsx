@@ -22,11 +22,6 @@ export const Index = () => {
                 ...state,
                 currentIndex: action?.index
             };
-        case 'Final':
-            return {
-                ...state,
-                currentIndex: 3, currentPosition: 3,
-            };
         case 'RESET':
             return { ...state, currentIndex: 0, currentPosition: 0, };
 
@@ -37,16 +32,15 @@ export const Index = () => {
     const [state, dispatch] = useReducer(reducer, {
         currentIndex: 0,
         data: [
-            { id: 1, name: 'Slide 1', image: 'https://http2.mlstatic.com/D_NQ_966486-MLA46295117288_062021-OO.webp' },
-            { id: 4, name: 'Slide 4', image: 'https://http2.mlstatic.com/D_NQ_922391-MLA46294809949_062021-OO.webp' },
-            { id: 5, name: 'Slide 5', image: 'https://http2.mlstatic.com/D_NQ_790427-MLA46295213143_062021-OO.webp' },
+            { id: 1, name: 'Slide 5', image: 'https://http2.mlstatic.com/storage/splinter-admin/o:f_webp,q_auto:best/1624553812377-home-sliderdesktop2x.jpg' },
+            { id: 2, name: 'Slide 5', image: 'https://http2.mlstatic.com/storage/splinter-admin/o:f_webp,q_auto:best/1624555002140-home-sliderdesktop2x.jpg' },
         ]
     }
     );
-    // const price = 120000645645
     return (
         <>
-            <CustomSlider state={state} dispatch={dispatch}>
+            <CustomSlider state={state} dispatch={dispatch} duration={'500ms'} to={{ pathname: `/${ state.data.id || state.cs_id || state.scs_id ? 'servicios' : 'productos' }/categorias/${ state?.categoryproduct?.cp_id || state?.categoryservice?.cs_id || state.uscs_id || state.uscp_id || state?.cp_id || state?.cs_id }`
+            }} >
             </CustomSlider>
             <Container>
                 <PaymentData />

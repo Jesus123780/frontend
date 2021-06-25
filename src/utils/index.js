@@ -3,6 +3,7 @@ export const isNull = dato => {
         return true
     } else return false
 }
+import jwtDecode from 'jwt-decode'
 
 export const isNumeric = dato => {
     // const value = dato.replace(/,/g, '');
@@ -29,8 +30,7 @@ export const rangeLength = (dato, min, max) => {
         if ((dato.length < min) || (dato.length > max)) {
             return true
         } else return false
-    } else
-    {return false}
+    } else { return false }
 }
 
 export const Match = (dato1, dato2) => {
@@ -91,7 +91,7 @@ export const CalcularDigitoVerificacion = value => {
     for (i; i < z; i++) {
         y = myNit.substr(i, 1)
 
-        x += (y * vpri[z-i])
+        x += (y * vpri[z - i])
     }
 
     y = x % 11
@@ -111,9 +111,9 @@ export const extFile = filename => {
  */
 export const validationSubmitHooks = elements => {
     let errorForm = {}
-    for (let i = 0; i < elements.length; i++){
+    for (let i = 0; i < elements.length; i++) {
         if (elements[i].name) {
-            if (elements[i].type === 'text' || elements[i].type === 'password' || elements[i].type === 'email' || elements[i].type === 'number' || elements[i].type === 'hidden'){
+            if (elements[i].type === 'text' || elements[i].type === 'password' || elements[i].type === 'email' || elements[i].type === 'number' || elements[i].type === 'hidden') {
                 if (elements[i].dataset.required === 'true') {
                     if (!elements[i].value) errorForm = { ...errorForm, [elements[i].name]: !elements[i].value }
                     else errorForm = { ...errorForm, [elements[i].name]: !elements[i].value }
@@ -158,8 +158,8 @@ export const filterKeyObject = (data, filters, dataFilter) => {
  */
 export const urlToFile = async (url, filename, mimeType) => {
     return (fetch(url)
-        .then(function(res){return res.arrayBuffer();})
-        .then(function(buf){return new File([buf], filename, { type:mimeType }) })
+        .then(function (res) { return res.arrayBuffer(); })
+        .then(function (buf) { return new File([buf], filename, { type: mimeType }) })
     );
 }
 
@@ -188,10 +188,38 @@ export const updateCache = async ({ cache, query, nameFun, dataNew, type, id }) 
     return cache.modify({
         fields: {
             [nameFun](dataOld = []) {
-                if (type === 1) return cache.writeQuery({ query, data: [...(dataOld || []), { ...(dataNew || {}) } ] })
+                if (type === 1) return cache.writeQuery({ query, data: [...(dataOld || []), { ...(dataNew || {}) }] })
                 if (type === 2) return cache.writeQuery({ query, data: { ...(dataOld || {}), ...(dataNew || {}) } })
                 if (type === 3) return cache.writeQuery({ query, data: dataOld.filter(x => x === id) })
             }
         }
     })
+}
+
+/**
+ * obtiene el token del usuario lo guarda en el localStorage
+ * @returns {null} no hay retorno
+ */
+const TOKEN = 'token'
+export function setToken(token) {
+    localStorage.setItem(TOKEN, token)
+}
+/**
+ * obtiene el token del usuario
+ * @returns {null} no hay retorno
+ */
+export function getToken() {
+    return localStorage.getItem(TOKEN)
+}
+// obtiene el token del usuario y lo descodifica
+export function decodeToken(token) {
+    return jwtDecode(token)
+}
+// Obtiene el token y lo elimina
+export function removeToken() {
+    return localStorage.removeItem(TOKEN)
+}
+export const validateEmail = email => {
+    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
 }

@@ -6,34 +6,10 @@ export const BoxInput = styled.div`
     width: ${ ({ width }) => width ? width : '100%' };
 `
 export const Tooltip = styled.div`
-    position: absolute;
-    display: none;
-    right: 5px;
-    bottom: 100%;
-    border: 1px solid #0de0fe;
-    background-color: #fff;
-    padding: 10px 10px;
-    border-radius: 2px;
+    display: block;
     z-index: 10;
     font-size: 13px;
     color: #121319;
-    &::after, &::before {
-        top: 100%;
-        left: 90%;
-        border: solid transparent;
-        content: "";
-        position: absolute;
-        pointer-events: none;
-    }
-    &::after {
-        border-top-color: '#35a8df';
-        border-width: 4px;
-    }
-    &::before {
-        border-top-color: '#35a8df';
-        border-width: 5px;
-        margin-left: -1px;
-    }
 `
 export const LabelInput = styled.span`
     position: absolute;
@@ -66,8 +42,6 @@ export const InputV = styled.input`
         color: #CCC;
         padding: 0px 5px ;
     }
-    &:focus { border: 1px solid '#35a8df'; }
     &:disabled { cursor: no-drop; }
-    &:hover ~ ${ Tooltip } { display: block; }
     ${ ({ error }) => error && css`background-color: #FBCACA;` }
 `

@@ -1,12 +1,12 @@
 import styled, { css } from 'styled-components';
+import { SFColor } from '../../../assets/colors';
+import { Link } from 'react-router-dom'
 
 export const SliderContainer = styled.div`
   position: relative;
   background: #fafafa;
   overflow: hidden;
   width: 100%;
-  height: ${ props => props.height || 'auto' };
-
 `;
 
 export const SliderWrapper = styled.div`
@@ -15,19 +15,17 @@ export const SliderWrapper = styled.div`
   width: 100%;
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
-  width: ${ props => `${ props.width }px` || '100%' };
-
-`;
+`
 
 export const SliderItem = styled.div`
   position: relative;
-  width: ${ props => `${ props.width }px` || '100%' };
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  /* justify-content: center;
   align-items: center;
-  font-size: 40px;
+  font-size: 40px; */
+  padding: 0px 100px;
+  cursor: pointer;
 `;
 
 export const Navigation = styled.ul`
@@ -63,6 +61,7 @@ export const NavigationItem = styled.li`
 export const Control = styled.button`
     position: absolute;
     top: 50%;
+    color: ${ props => props.color || SFColor };
     align-items:center;
     width: 40px;
     height: 40px;
@@ -81,18 +80,21 @@ export const Control = styled.button`
         opacity: 59%;
         background-color:#b4b4b4;
     }
+  ${ props => !props.display ? css`display: block;` : css`display: none;` };
+
 `;
 
 export const ControlLeft = styled(Control)`
   left: 0;
   border-bottom-left-radius: 0;
   border-top-left-radius: 0;
-
 `;
 export const ControlRight = styled(Control)`
   right: 0;
   border-bottom-right-radius: 0;
   border-top-right-radius: 0;
+  color: ${ props => props.color || SFColor };
+
 `;
 
 export const BigElement = styled.div`
@@ -103,8 +105,12 @@ export const BigElement = styled.div`
 export const Image = styled.img`
   height: auto;
   min-height: auto;
-  max-width: 1600px !important;
+  max-width: none !important;
   flex: 0 0 auto;
   object-fit: cover;
-  
+  /* max-width: 1600px !important; */
+`;
+export const Ruta = styled(Link)`
+display: contents;
+  /* max-width: 1600px !important; */
 `;
