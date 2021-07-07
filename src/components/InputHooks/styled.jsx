@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components'
-
+import { PColor, BGColor, BColor } from '../../assets/colors'
 export const BoxInput = styled.div`
     position: relative;
     padding: ${ ({ padding }) => padding ? padding : '10px 5px' };
@@ -7,21 +7,25 @@ export const BoxInput = styled.div`
 `
 export const Tooltip = styled.div`
     display: block;
+    background-color: ${ ({ theme }) => theme.BGColor };
+    padding: 0px 5px;
+    border-radius: 2px;
     z-index: 10;
-    font-size: 13px;
-    color: #121319;
+    font-size: 13px !important;
+    color: ${ PColor };
 `
 export const LabelInput = styled.span`
     position: absolute;
-    font-size: ${ ({ value, type }) => (value || type === 'date') ? '16px' : '20px' };
-    top: ${ ({ value, type }) => (value || type === 'date') ? '20px' : '22px' };
+    text-align: left;
+    font-size: ${ ({ value }) => value ? '10px' : '16px' };
+    top: ${ ({ value }) => value ? '5px' : '27px' };
+    left: 15px;;
     left: ${ ({ left }) => left ? left : '17px' };
-    color: ${ ({ value, labelColor, error }) => value ? (labelColor ? labelColor : '#272323') : (error ? '#fff' : '#CCC') };
-    transition: .3s;
-    background-color: white;
-
+    color: ${ ({ value, labelColor, error }) => value ? (labelColor ? labelColor : '#CCC;') : (error ? '#ccc' : `${ BColor }`) };
+    transition: .2s;
+    background-color: ${ BGColor };
     pointer-events: none;
-    font-weight: ${ ({ value }) => value ? 600 : 400 };
+    font-family: PFont-Light;
 `
 export const InputV = styled.input`
     color: ${ props => (props.type === 'date' && !props.value) ? '#CCC' : '#272323' };
@@ -35,13 +39,14 @@ export const InputV = styled.input`
     border-radius: ${ ({ radius }) => radius ? radius : '5px' };
     ${ ({ margin }) => !!margin && css`margin: ${ margin };` }
     ${ ({ minWidth }) => minWidth && css`min-width: ${ minWidth };` }
-    ${ ({ bgColor }) => bgColor && css`background-color: ${ bgColor };` }
     &:focus ~ ${ LabelInput } {
-        top: -10px;
+        top: 0px;
         font-size: 20px;
         color: #CCC;
         padding: 0px 5px ;
     }
+    &:focus { border: 1px solid '#35a8df'; }
     &:disabled { cursor: no-drop; }
-    ${ ({ error }) => error && css`background-color: #FBCACA;` }
+    &:hover ~ ${ Tooltip } { display: block; }
+    ${ ({ error }) => error && css`border: 1px solid ${ PColor };` }
 `

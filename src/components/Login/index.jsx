@@ -60,8 +60,7 @@ export const Login = () => {
                 <Container>
                     <Overline />
                     <ContainerSliderForm onSubmit={handleRegister}>
-                        <Text>Inicia sesión
-                        </Text>
+                        <Text>Inicia sesión</Text>
                         <InputHooks name="email"
                             value={values?.email}
                             errors={values?.email}

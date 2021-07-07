@@ -14,7 +14,6 @@ const InputHooks = ({
     padding,
     radius,
     labelColor,
-    bgColor,
     type,
     value,
     onChange,
@@ -107,7 +106,6 @@ const InputHooks = ({
                 radius={radius}
                 error={errors}
                 autoComplete={type === 'password' ? 'current-password' : 'true'}
-                bgColor={bgColor}
                 paddingInput={paddingInput}
             />
             <LabelInput value={value} labelColor={labelColor} error={error}>{title}</LabelInput>

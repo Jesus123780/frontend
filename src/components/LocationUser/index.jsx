@@ -34,13 +34,13 @@ export const EnterLocation = () => {
             <ContainerModal modal={modal} onClick={() => setModal(!modal)}>
                 <AwesomeModal onClick={e => e.stopPropagation()} modal={modal}>
                     {showCard ?
-                        <Card>
-                            <Text>¿Donde quieres recibir tu pedido?</Text>
+                        <Card padding='0px'>
                             <ContentForm>
                                 <LocationForm />
                             </ContentForm>
                         </Card>
-                        : <Card>
+                        : <Card padding='30px'>
+                            <Text>¿Donde quieres recibir tu pedido?</Text>
                             <ContainerBottom>
                                 <RippleButton width='100%' label='Buscar direction' onClick={() => setShowCard(!showCard)}>
                                     {/* <IconSearch size='20px' color={'#fff'} /> */}
@@ -118,7 +118,7 @@ const Card = styled.div`
     background-color: ${ BGColor };
     width: 700px;
     margin: auto;
-    padding: 30px;
+    padding: ${ ({ padding })=> padding ? padding: '30px' };
     overflow-y: auto;
     max-height: 500px;
     min-height: 450px;

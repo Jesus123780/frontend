@@ -10,15 +10,11 @@ import { LoadEllipsis } from '../LoadingButton';
 import { ContainerSliderForm, TextRegister, Text, Alert, Container, Overline, ButtonSubmit, InputCheckbox } from './styled'
 
 export const Registration = () => {
-    // Contexto
-    // const { setUser } = useAuth()
     const [login, { loading, error }] = useMutation(LOGIN)
     const [values, setValues] = useState({})
-    // const { setAlertBox } = useContext(Context)
     const handleChange = e => {
         setValues({ ...values, [e.target.name]: e.target.value })
     }
-
     const handleRegister = async e => {
         e.preventDefault()
         const { email, password } = values

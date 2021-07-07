@@ -5,6 +5,7 @@ import PropTypes from 'prop-types'
 
 export const AwesomeModal = ({
     title,
+    padding,
     size = MODAL_SIZES.medium,
     show,
     backdrop = true,
@@ -37,6 +38,13 @@ export const AwesomeModal = ({
     useEffect(() => {
         setState(show)
     }, [show])
+    useEffect(() => {
+        if (show) {
+            document.body.style.overflow = 'hidden'
+        } else {
+            document.body.style.overflow = 'auto'
+        }
+    }, [show])
     const onBackdropHide = e => {
         e.preventDefault()
         if (backdrop === 'static') return 0
@@ -50,13 +58,6 @@ export const AwesomeModal = ({
         if (hideOnConfirm) hide()
         onConfirm()
     }
-    useEffect(() => {
-        if (show) {
-            document.body.style.overflow = 'hidden'
-        } else {
-            document.body.style.overflow = 'auto'
-        }
-    }, [show])
     return (
         <Container show={show} state={state} onMouseDown={onBackdropHide}>
             <Wrapper onMouseDown={onBackdropHide}>
@@ -66,7 +67,7 @@ export const AwesomeModal = ({
                         <BtnClose onClick={hide}></BtnClose>
                     </ModalHeader>}
                     {(closeIcon && !header) && <BtnClose fixed onClick={hide}></BtnClose>}
-                    <ModalBody height={height}>
+                    <ModalBody padding={padding} height={height}>
                         {children}
                     </ModalBody>
                     {footer && <ModalFooter>
@@ -88,7 +89,6 @@ AwesomeModal.propTypes = {
     footer: PropTypes.bool,
     btnCancel: PropTypes.bool,
     btnConfirm: PropTypes.bool,
-    children: PropTypes.string,
     hiddeOnConfirm: PropTypes.bool,
     timeOut: PropTypes.number,
     height: PropTypes.string,
@@ -97,7 +97,6 @@ AwesomeModal.propTypes = {
     onHidde: PropTypes.func,
     onCancel: PropTypes.func,
     onConfirm: PropTypes.func,
-
     hideOnConfirm: PropTypes.func,
     closeIcon: PropTypes.func,
     borderRadius: PropTypes.func,
