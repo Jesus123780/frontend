@@ -1,19 +1,23 @@
 import React, { useEffect, useState } from 'react'
 import ReactDOM from 'react-dom'
 import { useMutation } from '@apollo/client';
-import { setToken } from '../../utils';
+import { decodeToken, setToken } from '../../utils';
 import { LOGIN } from '../../gql/LoginAut';
 import { PColor } from '../../assets/colors';
 import InputHooks from '../InputHooks/InputHooks';
 import { LoadEllipsis } from '../LoadingButton';
 import { ContainerSliderForm, TextRegister, Text, Alert, Container, Overline, ButtonSubmit } from './styled'
+import useAuth from '../hooks/useAuth';
+import { useHistory } from 'react-router'
 
 export const Login = () => {
     // Contexto
-    // const { setUser } = useAuth()
+    const { setUser } = useAuth()
     const [login, { loading, error }] = useMutation(LOGIN)
     const [values, setValues] = useState({})
     // const { setAlertBox } = useContext(Context)
+    const router = useHistory()
+
     const handleChange = e => {
         setValues({ ...values, [e.target.name]: e.target.value })
     }
@@ -32,13 +36,11 @@ export const Login = () => {
             })
             const { token } = data.login
             setToken(token)
-            // setUser(decodeToken(token))
+            setUser(decodeToken(token))
+            router.push('/')
+
         } catch (erro) {
             setValues({})
-            // setAlertBox({
-            //     message: erro.message,
-            //     duration: 10000,
-            // })
         }
     }
     useEffect(() => {

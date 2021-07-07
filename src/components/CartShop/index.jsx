@@ -7,16 +7,17 @@ import { useApolloClient } from '@apollo/client'
 import { IconLogout, IconShopping, IconArrowRight } from '../../assets/icons/icons'
 import { Setting } from './setting/index'
 import { RippleButton } from '../Ripple'
+import useAuth from '../hooks/useAuth'
 import { Content, FloatingBox, Button, FloatingBoxTwo, Overline } from './styled'
 
 export const CartShop = () => {
-    const auth = false
+    const { auth, logout } = useAuth()
     const { client } = useApolloClient()
     const [show, setShow] = useState(false)
 
     const onClickLogout = () => {
         client?.clearStore()
-        // logout()
+        logout()
     }
     useEffect(() => {
         const body = document.body
@@ -40,7 +41,7 @@ export const CartShop = () => {
     return (
         <div style={{ display: 'block' }}>
             <Overline onClick={() => setShow(!true)} show={show} />
-            <Content >
+            {auth && <><Content >
                 <Button onClick={() => handleClick(1)}>
                     <IconShopping size='25px' color={PColor} />
                 </Button>
@@ -65,9 +66,13 @@ export const CartShop = () => {
                     <FloatingBoxTwo show={show === 2}>
                         <Option>
                             <Enlace to={''}>
-                                <Avatar />
+                                <Avatar>
+                                    <Text>
+                                        {auth?.Uname.slice(0, 2).toUpperCase()}
+                                    </Text>
+                                </Avatar>
                                 <BoxUser>
-                                    <span>Hola, Jesus</span>
+                                    <span>Hola, {auth?.Uname}</span>
                                     <span>Ver tu perfil</span>
                                 </BoxUser>
                             </Enlace>
@@ -91,10 +96,22 @@ export const CartShop = () => {
                     </FloatingBoxTwo>
                 </ContainerOption>
             </Content>
-            {!auth && <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <Enlace to='/'>Crear una cuenta</Enlace>
-                <Enlace to='/'>Ingresar</Enlace>
-                <Enlace to='/'>Historial</Enlace>
+            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <Enlace to='/historial'>Mis compras</Enlace>
+                <Enlace to='/historial'>Promociones</Enlace>
+                <Enlace to='/historial'>Historial</Enlace>
+            </div>
+            </>
+            }
+            {!auth && <div style={{ display: 'flex', justifyContent: 'space-between', flexDirection: 'column' }}>
+                <Advertising>
+                    50%to en todos los productos
+                </Advertising>
+                <div style={{ display: 'flex', justifyContent: 'space-between', flexDirection: 'row' }}>
+                    <Enlace to='/registration'>Crear una cuenta</Enlace>
+                    <Enlace to='/login'>Ingresar</Enlace>
+                    <Enlace to='/historial'>Historial</Enlace>
+                </div>
             </div>
             }
         </div>
@@ -102,6 +119,10 @@ export const CartShop = () => {
 }
 const ContainerOption = styled.div`
     position: relative;
+`
+const Advertising = styled.div`
+    position: relative;
+    padding: 10px;
 `
 const Enlace = styled(Link)`
     position: relative;
@@ -123,14 +144,21 @@ const Option = styled.div`
         background-color: #ffffff1a;
     }
 `
-const Avatar = styled.img`
+const Avatar = styled.div`
     width: 60px;
     min-width: 60px;
     height: 60px;
+    justify-content: center;
     background-color: #ffff;
     border-radius: 100%;
     border: 2px solid red;
     padding: 1px;
+    display: flex;
+    align-items: center;
+`
+const Text = styled.span`
+    font-size: 17px;
+    font-family:  PFont-Regular;
 `
 const BoxUser = styled.div`
     width: 65px;

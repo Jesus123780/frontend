@@ -3,11 +3,13 @@ import ReactDOM from 'react-dom'
 import styled, { css } from 'styled-components';
 import { BGColor, PColor } from '../../assets/colors';
 import { RippleButton } from '../Ripple';
-import { IconEnterLocation, IconArrowBottom, IconSearch } from '../../assets/icons/icons'
+import { LocationForm } from './formLocation';
+import { IconEnterLocation, IconArrowBottom } from '../../assets/icons/icons'
 import { DeliveryInputWrapper, Text, Button } from './styled';
 
 export const EnterLocation = () => {
     const [modal, setModal] = useState(false)
+    const [showCard, setShowCard] = useState(false)
     useEffect(() => {
         if (modal) {
             document.body.style.overflow = 'hidden'
@@ -31,17 +33,25 @@ export const EnterLocation = () => {
         {ReactDOM.createPortal(<>
             <ContainerModal modal={modal} onClick={() => setModal(!modal)}>
                 <AwesomeModal onClick={e => e.stopPropagation()} modal={modal}>
-                    <Card>
-                        <RippleButton label="Buscar dirección">
-                            <IconSearch size='20px' color={'#fff'} />
-                        </RippleButton>
-                        {[1, 1, 2, 4, 5, 6, 2, 4, 5, 6].map(x =>(<CardLocationItem key={x}>
-                            <span>Direction</span>
-                            <span>Direction</span>
-                        </CardLocationItem>
+                    {showCard ?
+                        <Card>
+                            <Text>¿Donde quieres recibir tu pedido?</Text>
+                            <ContentForm>
+                                <LocationForm />
+                            </ContentForm>
+                        </Card>
+                        : <Card>
+                            <ContainerBottom>
+                                <RippleButton width='100%' label='Buscar direction' onClick={() => setShowCard(!showCard)}>
+                                    {/* <IconSearch size='20px' color={'#fff'} /> */}
+                                </RippleButton>
+                            </ContainerBottom>
+                            {[1, 2, 4].map(x => (<CardLocationItem key={x}>
+                                <span>Direction</span>
+                            </CardLocationItem>
 
-                        ))}
-                    </Card>
+                            ))}
+                        </Card>}
                 </AwesomeModal>
             </ContainerModal>
         </>, document.getElementById('root')
@@ -65,7 +75,8 @@ const ContainerModal = styled.div`
         bottom: 0;
         min-height: 100%;
         z-index: 10000;
-        background-color: rgba(0, 0, 0, 0.4);
+        background-color:rgba(0, 0, 0, 0.322);
+
               `
         : css`
                 
@@ -110,6 +121,7 @@ const Card = styled.div`
     padding: 30px;
     overflow-y: auto;
     max-height: 500px;
+    min-height: 450px;
     display: flex;
     flex-direction: column;
     &::-webkit-scrollbar {
@@ -118,6 +130,10 @@ const Card = styled.div`
         border-radius: 5px;
     }
 
+`
+const ContainerBottom = styled.div`
+    background-color: transparent;
+    width: 100%;
 `
 const CardLocationItem = styled.div`
     width: 100%;
@@ -135,11 +151,18 @@ const CardLocationItem = styled.div`
     cursor: pointer;
     border-radius: 8px;
     margin: 5px 0px;
-    ${ props=> props.active ? css`
-        border-color: #ea1d2c;
-        color: #3e3e3e;
+    ${ props => props.active ? css`
+    border-color: #ea1d2c;
+    color: #3e3e3e;
     ` : css`
-        border: 1px solid #f2f2f2;
+    border: 1px solid #f2f2f2;
     ` }
-`
+    `
 // use useLazyQuery se ejecuta cuando espera una acción
+const ContentForm = styled.div`
+    background-color: transparent;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+`

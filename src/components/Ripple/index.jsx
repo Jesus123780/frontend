@@ -4,7 +4,7 @@ import { BGColor } from '../../assets/colors';
 import './styled.css';
 
 export const RippleButton = props => {
-    const { label, onClick, style, family, standard } = props;
+    const { label, onClick, style, family, standard, active } = props;
     const button = useRef(null);
 
     useEffect(() => {
@@ -30,7 +30,7 @@ export const RippleButton = props => {
     }, []);
 
     return (
-        <Button standard={standard} family={family} padding={ props.padding } color={ props.color } margin={ props.margin } bgColor={ props.bgColor} ref={button} onClick={onClick} className="ripple-button" style={style}>
+        <Button active={active} standard={standard} family={family} width={props.width} padding={ props.padding } color={ props.color } margin={ props.margin } bgColor={ props.bgColor} ref={button} onClick={onClick} className="ripple-button" style={style}>
             <span id="ripple-button-label">{label}</span>
             {props.children}
         </Button>
@@ -40,6 +40,7 @@ const Button = styled.button`
  padding: ${ ({ padding })=> padding ? padding: '1em' };
  background-color: ${ ({ bgColor })=> bgColor ? bgColor: 'red' };
  color: ${ ({ color })=> color ? color: BGColor };
+ width: ${ ({ width })=> width ? width: 'auto' };
  font-family: ${ ({ family })=> family ? family: 'PFont-Light' };
  ${ ({ margin }) => !!margin && css`margin: ${ margin };` }
  ${ ({ standard }) => standard && css`
@@ -53,4 +54,5 @@ const Button = styled.button`
 }
     
  ;` }
+ ${ props=> props.active && css`border-bottom: 3px solid red;` }
 `
