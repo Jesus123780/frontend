@@ -13,7 +13,7 @@ export default [
         elementType: 'geometry.stroke',
         stylers: [
             {
-                color: '#c5090942',
+                color: '#fefefe',
             },
         ],
     },
@@ -22,7 +22,7 @@ export default [
         elementType: 'labels.text',
         stylers: [
             {
-                visibility: 'Off',
+                visibility: 'off',
             },
         ],
     },
@@ -40,7 +40,7 @@ export default [
         elementType: 'geometry.fill',
         stylers: [
             {
-                color: '#ffffff',
+                color: '#f8f9fa',
             },
         ],
     },
@@ -49,7 +49,7 @@ export default [
         elementType: 'geometry.fill',
         stylers: [
             {
-                color: '#dddada',
+                color: '#ebebeb',
             },
         ],
     },

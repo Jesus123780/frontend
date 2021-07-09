@@ -7,28 +7,25 @@ import mapStyle from './mapStyles'
 import { IconArrowLeft } from '../../../assets/icons/icons'
 import { PColor } from '../../../assets/colors'
 import { useGoogleAddress } from '../../../components/hooks/useGoogleAddress'
+import { Span } from './styled'
 
-// import { Card, Div, Span, Text, IMG } from './styled'
+export const Map = props => {
+    const { setShowCard, showCard } = props
 
-export const Map = () => {
-    // const [showInfo, setShowInfo] = useState(false)
-    // const [dataMap, setDataMap] = useState({})
-    // const handleClick = x => {
-    //     setShowInfo(true)
-    //     setDataMap(x)
-    // }
     const mapContainerStyle = {
-        height: '40vh',
+        height: '60vh',
         width: '100%',
+        position: 'absolute'
     }
     const options = {
         styles: mapStyle,
         disableDefaultUI: true,
-        zoomControl: false
+        zoomControl: false,
+
     }
     const defaultCenter = {
-        lat: 10.993983961451658,
-        lng: -74.81786794905953,
+        lat: 10.999881951815418,
+        lng: -74.80783927407826,
     }
     // eslint-disable-next-line
     const [map, setMap] = useState(null)
@@ -40,34 +37,37 @@ export const Map = () => {
         setMap(map)
     }, [])
     const [markers, setMarkers] = React.useState([]);
-
+    console.log(markers)
+    const onMapClick = React.useCallback(e => {
+        setMarkers(() => [{
+            lat: e.latLng.lat(),
+            lng: e.latLng.lng(),
+            time: new Date(),
+        },
+        ]);
+    });
     return (<Container >
         <useGoogleAddress />
-        <MapHeader><IconArrowLeft size={20} color={PColor} /><div>Et que pasa</div><div>Null</div></MapHeader>
-        <LoadScript googleMapsApiKey='AIzaSyCih9A0MFzGaM6EynW_5gQnTNiS0UWlR0E'>
-            <GoogleMap ondragstart={() => setHandelDrag(1)} ondragend={() => setHandelDrag(0)}
-                draggable
+        <MapHeader>
+            <button style={{ backgroundColor: 'transparent' }} onClick={() => setShowCard(!showCard)} >
+                <IconArrowLeft size={20} color={PColor} />
+            </button>
+            <Span>{markers[0]?.lat}</Span><div></div>
+        </MapHeader>
+        <LoadScript googleMapsApiKey='AIzaSyDoZxcY8aH7fBFEa-O51yJj_GpJ35r1pf4'>
+            <GoogleMap onDragStart={() => setHandelDrag(0)} onDragEnd={() => setHandelDrag(1)}
                 mapContainerStyle={mapContainerStyle}
-                zoom={16}
-                center={defaultCenter}
+                zoom={19}
                 onLoad={onLoad}
                 options={options}
-                onMouseOut={e =>{
-                    setMarkers(current => [...current, {
-                        lat: e.latLng.lat(),
-                        lng: e.latLng.lng(),
-                        time: new Date(),
-                    }])
-                }}
+                onClick={onMapClick}
+                center={markers}
             >
-                {handleDrag === 0 &&
-                    <Marker ondragstart={() => setHandelDrag(1)} ondragend={() => setHandelDrag(0)}
-                        position={defaultCenter}
-                    />
-                }
-                <h1>{markers[0]?.lat}</h1>
+                <Marker
+                    position={!defaultCenter ? defaultCenter : { lat: markers[0]?.lat, lng: markers[0]?.lng }}
+                />
             </GoogleMap>
-            {handleDrag === 0 && <ContentButton>
+            {handleDrag === 1 && <ContentButton>
                 <RippleButton style={{ width: '40%' }} onClick={() => setMap(0)}>Confirmar</RippleButton>
             </ContentButton>}
         </LoadScript>
@@ -78,26 +78,29 @@ export const Map = () => {
 Map.propTypes = {
     google: PropTypes.func
 }
-const Container= styled.div`
+const Container = styled.div`
     position: relative;
 `
-const MapHeader= styled.div`
+const MapHeader = styled.div`
     padding: 30px;
     width: 100%;
     display: grid;
     top: 0;
     left: 0;
+    position: absolute;
     grid-template-columns: 50px 1fr 50px;
     padding: 27px 20px;
+    z-index: 9999;
     background: linear-gradient(
     0deg
     , rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.8) 25%, white 100%);
 `
-const ContentButton= styled.div`
-    position: absolute;
-    bottom: 20px;
+const ContentButton = styled.div`
     width: 100%;
+    position: absolute;
     margin: auto;
     display: flex;
     justify-content: center;
+    z-index: 99999;
+    bottom: -550px;
 `

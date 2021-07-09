@@ -17,7 +17,7 @@ export const Tooltip = styled.div`
 export const LabelInput = styled.span`
     position: absolute;
     text-align: left;
-    font-size: ${ ({ value }) => value ? '10px' : '16px' };
+    font-size: ${ ({ value }) => value ? '16px' : '16px' };
     top: ${ ({ value }) => value ? '5px' : '27px' };
     left: 15px;;
     left: ${ ({ left }) => left ? left : '17px' };
