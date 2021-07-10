@@ -5,7 +5,7 @@ import InputHooksSearcher from '../InputHooksSearcher/InputHooks'
 import { IconLogo } from '../../assets/icons/icons'
 import { CartShop } from '../CartShop'
 import { EnterLocation } from '../LocationUser'
-import { Header, Content, ContentInput } from './styled'
+import { Header, Content, ContentInput, ListLink, Enlace } from './styled'
 
 export const HeaderC = () => {
     const [values, setValues] = useState({})
@@ -22,11 +22,14 @@ export const HeaderC = () => {
                         <IconLogo size='80px' color={PColor} />
                     </Link>
                 </div>
-                <div>
-                    <ContentInput>
-                        <InputHooksSearcher title='Busca tus productos' name='cliNam' value={values?.cliNam} onChange={handleChange} type='text' range={{ min: 0, max: 20 }} />
-                    </ContentInput>
-                </div>
+                <ContentInput>
+                    <InputHooksSearcher title='Busca tus productos' name='cliNam' value={values?.cliNam} onChange={handleChange} />
+                    <ListLink>
+                        <Enlace to='/'>Categories</Enlace>
+                        <Enlace to='/'>Ofertas</Enlace>
+                        <Enlace to='/ayuda'>Ayuda / PQR</Enlace>
+                    </ListLink>
+                </ContentInput>
                 <div>
                     <EnterLocation />
                 </div>

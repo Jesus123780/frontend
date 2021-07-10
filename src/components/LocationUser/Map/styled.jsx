@@ -27,5 +27,3 @@ export const Text = styled.span`
 export const Div = styled.div`
     width: 100%;
 `
-// Icono  de Ubicación
-export const IMG = 'https://es.gravatar.com/userimage/169146149/5079bfd6776cc41660ec57edbe0a6a8e.png'

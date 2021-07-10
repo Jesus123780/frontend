@@ -45,7 +45,7 @@ export const Tooltip = styled.div`
 `
 export const InputV = styled.input`
     color: ${ props => (props.type === 'date' && !props.value) ? '#CCC' : '#272323' };
-    padding: ${ props => props.padding ? props.padding : '20px 10px' };
+    padding: ${ props => props.padding ? props.padding : '10px 10px' };
     outline: 0;
     background-color: ${ ({ theme }) => theme.TColor };
     border: none;

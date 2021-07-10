@@ -12,6 +12,7 @@ import { ContainerSliderForm, TextRegister, Text, Alert, Container, Overline, Bu
 export const Registration = () => {
     const [login, { loading, error }] = useMutation(LOGIN)
     const [values, setValues] = useState({})
+
     const handleChange = e => {
         setValues({ ...values, [e.target.name]: e.target.value })
     }
@@ -29,13 +30,8 @@ export const Registration = () => {
             })
             const { token } = data.login
             setToken(token)
-            // setUser(decodeToken(token))
         } catch (erro) {
             setValues({})
-            // setAlertBox({
-            //     message: erro.message,
-            //     duration: 10000,
-            // })
         }
     }
     useEffect(() => {

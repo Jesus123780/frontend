@@ -10,8 +10,7 @@ import { useGoogleAddress } from '../../../components/hooks/useGoogleAddress'
 import { Span } from './styled'
 
 export const Map = props => {
-    const { setShowCard, showCard } = props
-
+    const { setShowCard, showCard, setAnimationTrans, animationTrans } = props
     const mapContainerStyle = {
         height: '60vh',
         width: '100%',
@@ -29,7 +28,7 @@ export const Map = props => {
     }
     // eslint-disable-next-line
     const [map, setMap] = useState(null)
-    const [handleDrag, setHandelDrag] = React.useState(0)
+    // const [handleDrag, setHandelDrag] = React.useState(0)
     // eslint-disable-next-line
     const onLoad = useCallback(function callback(map) {
         const bounds = new window.google.maps.LatLngBounds();
@@ -37,7 +36,6 @@ export const Map = props => {
         setMap(map)
     }, [])
     const [markers, setMarkers] = React.useState([]);
-    console.log(markers)
     const onMapClick = React.useCallback(e => {
         setMarkers(() => [{
             lat: e.latLng.lat(),
@@ -46,6 +44,9 @@ export const Map = props => {
         },
         ]);
     });
+    const handleSave =() =>{
+        setAnimationTrans(!animationTrans)
+    }
     return (<Container >
         <useGoogleAddress />
         <MapHeader>
@@ -55,20 +56,20 @@ export const Map = props => {
             <Span>{markers[0]?.lat}</Span><div></div>
         </MapHeader>
         <LoadScript googleMapsApiKey='AIzaSyDoZxcY8aH7fBFEa-O51yJj_GpJ35r1pf4'>
-            <GoogleMap onDragStart={() => setHandelDrag(0)} onDragEnd={() => setHandelDrag(1)}
+            <GoogleMap /* onDragStart={() => setHandelDrag(0)} onDragEnd={() => setHandelDrag(1)} */
                 mapContainerStyle={mapContainerStyle}
                 zoom={19}
                 onLoad={onLoad}
                 options={options}
                 onClick={onMapClick}
-                center={markers}
+                center={defaultCenter}
             >
                 <Marker
                     position={!defaultCenter ? defaultCenter : { lat: markers[0]?.lat, lng: markers[0]?.lng }}
                 />
             </GoogleMap>
-            {handleDrag === 1 && <ContentButton>
-                <RippleButton style={{ width: '40%' }} onClick={() => setMap(0)}>Confirmar</RippleButton>
+            {1 === 1 && <ContentButton>
+                <RippleButton style={{ width: '40%' }} onClick={handleSave}>Confirmar</RippleButton>
             </ContentButton>}
         </LoadScript>
     </Container>

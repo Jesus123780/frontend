@@ -45,7 +45,6 @@ export const EnterLocation = () => {
     const handleClick = index => {
         setShowCard(index === showCard ? false : index)
     }
-    console.log(showCard)
     return (<>
         <DeliveryInputWrapper onClick={() => setModal(!modal)}>
             <Button standard2>
@@ -70,9 +69,10 @@ export const EnterLocation = () => {
                                 <RippleButton onClick={() => handleClick(1)} width='100%' label='Buscar direction'>
                                 </RippleButton>
                             </ContainerBottom>
-                            {[1, 2, 3, 5, 6, 3, 6, 7].map(index => (
+                            {[1, 2, 3 ].map(index => (
                                 <div>
-                                    <ContainerTask show={show === index} key={index.c_id}>
+                                    {/* eslint-disable-next-line */}
+                                    <ContainerTask show={show === index} key={index?.c_id}>
                                         <OptionsFunction show={show === index}>
                                             <Button><IconDelete size={30} /></Button>
                                             <Button onClick={() => setEdit({ id: index.c_id, value: index.c_name })} ><IconEdit size={30} /></Button>

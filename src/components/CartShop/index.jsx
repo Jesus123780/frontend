@@ -4,11 +4,13 @@ import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { BGColor, PColor, SEGColor } from '../../assets/colors'
 import { useApolloClient } from '@apollo/client'
-import { IconLogout, IconShopping, IconArrowRight } from '../../assets/icons/icons'
+import { IconLogout, IconShopping, IconArrowRight, IconPromo } from '../../assets/icons/icons'
 import { Setting } from './setting/index'
 import { RippleButton } from '../Ripple'
 import useAuth from '../hooks/useAuth'
 import { Content, FloatingBox, Button, FloatingBoxTwo, Overline } from './styled'
+import { NavLink } from 'react-router-dom'
+import './styles.css'
 
 export const CartShop = () => {
     const { auth, logout } = useAuth()
@@ -43,7 +45,7 @@ export const CartShop = () => {
             <Overline onClick={() => setShow(!true)} show={show} />
             {auth && <><Content >
                 <Button onClick={() => handleClick(1)}>
-                    <IconShopping size='25px' color={PColor} />
+                    <IconPromo size='25px' />
                 </Button>
                 <FloatingBox show={show === 1}>
                     lorem ipsum dolor sit am
@@ -82,14 +84,13 @@ export const CartShop = () => {
                             <IconArrowRight size='20px' color={PColor} />
                         </RippleButton>
                         <RippleButton standard onClick={onClickLogout} label={'Seguridad'}>
-                            <IconLogout size='20px' color={PColor} />
                         </RippleButton>
                         <RippleButton standard onClick={onClickLogout} label={'Ayuda'}>
-                            <IconLogout size='20px' color={PColor} />
                         </RippleButton>
-                        <RippleButton standard onClick={onClickLogout} label={'Editar datos'}>
-                            <IconLogout size='20px' color={PColor} />
-                        </RippleButton>
+                        <NavLink activeClassName='active' to={'/mi-cuenta/datos-de-registro'}>
+                            <RippleButton standard label={'Editar datos'}>
+                            </RippleButton>
+                        </NavLink>
                         <RippleButton standard onClick={onClickLogout} label={'cerrar'}>
                             <IconLogout size='20px' color={PColor} />
                         </RippleButton>
@@ -122,7 +123,7 @@ const ContainerOption = styled.div`
 `
 const Advertising = styled.div`
     position: relative;
-    padding: 10px;
+    padding: 7px;
 `
 const Enlace = styled(Link)`
     position: relative;

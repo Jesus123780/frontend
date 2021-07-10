@@ -61,7 +61,7 @@ export const CustomSlider = props => {
 
 const Slide = ({ item, div, to }) => {
     return (
-        <Ruta to={to}>
+        <Ruta to={to} >
             <SliderItem ref={div} >
                 <Image src={item?.image} alt={item?.image} />
             </SliderItem>

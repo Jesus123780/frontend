@@ -202,7 +202,8 @@ export const updateCache = async ({ cache, query, nameFun, dataNew, type, id }) 
  */
 const TOKEN = 'token'
 export function setToken(token) {
-    localStorage.setItem(TOKEN, token)
+    if (token === null) return false
+    else if (token !== null) return localStorage.setItem(TOKEN, token)
 }
 /**
  * obtiene el token del usuario

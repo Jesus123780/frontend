@@ -22,6 +22,7 @@ import { Contact } from './components/Contact';
 import { RecoverAccount } from './components/RecoverAccount';
 import { decodeToken, getToken, removeToken } from './utils';
 import AutoContext from './AutoContext'
+import { EditDatesUser } from './pages/EditDateUser';
 
 function App() {
     const [auth, setAuth] = useState(undefined)
@@ -92,6 +93,8 @@ function App() {
                                         <Route exact path='/registration' component={Registration} />
                                         <Route exact path='/login' component={Login} />
                                         <Route exact path='/recover-account' component={RecoverAccount} />
+                                        {/* USUARIO CONFIGURATION */}
+                                        <Route exact path='/mi-cuenta/datos-de-registro' component={EditDatesUser} />
 
                                         <Route component={NotFound} />
                                     </Switch>

@@ -168,4 +168,58 @@ export default [
             },
         ],
     },
+    {
+        featureType: 'transit.line',
+        elementType: 'geometry',
+        stylers: [
+            {
+                color: '#dfd2ae',
+            },
+        ],
+    },
+    {
+        featureType: 'transit.station',
+        elementType: 'geometry',
+        stylers: [
+            {
+                color: '#dfd2ae',
+            },
+        ],
+    },
+    {
+        featureType: 'road.highway.controlled_access',
+        elementType: 'geometry',
+        stylers: [
+            {
+                color: '#e98d58',
+            },
+        ],
+    },
+    {
+        featureType: 'road.highway.controlled_access',
+        elementType: 'geometry.stroke',
+        stylers: [
+            {
+                color: '#535353',
+            },
+        ],
+    },
+    {
+        featureType: 'road.arterial',
+        elementType: 'geometry',
+        stylers: [
+            {
+                color: '#fdfcf8',
+            },
+        ],
+    },
+    {
+        featureType: 'road.highway',
+        elementType: 'geometry',
+        stylers: [
+            {
+                color: '#e0e0e0',
+            },
+        ],
+    },
 ];
