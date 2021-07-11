@@ -1,10 +1,10 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { SliderItem, SliderContainer, SliderWrapper, Navigation, NavigationItem, ControlLeft, ControlRight, Image, Ruta } from './styled';
 import { IconArrowLeft, IconArrowRight } from '../../../assets/icons/icons'
 import { PColor } from '../../../assets/colors';
 export const CustomSlider = props => {
 
-    const { state, dispatch, duration, to } = props
+    const { state, dispatch, duration, to, autoPlayTime } = props
 
     // useEffect(() => {
     //     window.setInterval(() => {
@@ -15,7 +15,17 @@ export const CustomSlider = props => {
     //     }, 1000)
     // }, [])
     const div = useRef();
-    const [activeArrow, setActiveArrow] = useState('none')
+    const [activeArrow, setActiveArrow] = useState({})
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            if (state?.currentIndex < state?.data?.length - 1) {
+                dispatch({ type: 'NEXT' });
+            } else {
+                dispatch({ type: 'RESET' });
+            }
+        }, autoPlayTime);
+        return () => clearTimeout(timer);
+    }, [state]);
     return (
         <div>
             <SliderContainer onMouseOut={() => setActiveArrow(true)} onMouseOver={() => setActiveArrow(false)}>

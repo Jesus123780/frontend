@@ -1,37 +1,15 @@
-// import { useQuery, useMutation } from '@apollo/client'
+import { useMutation } from '@apollo/client'
 import React, { useState } from 'react'
-// import { useParams } from 'react-router-dom'
 import { EditDatesUser } from '../../components/EditDateUser'
 import useAuth from '../../components/hooks/useAuth';
-// import { GET_USER } from '../../gql/LoginAut'
-// import { UPDATE_AVATAR } from '../../gql/LoginAut'
+import { CHANGE_DATA_USER } from '../../gql/EditDataUser';
+import { validationSubmitHooks } from '../../utils';
 
 export const EditDatesUserC = () => {
-    // // Parametros para obetener el nombre del usuario
-    // const params = useParams()
-    // const { uUsername } = useParams()
-    // // Query para buscar a los usuarios por usuario
-    // const { data, loading, error } = useQuery(GET_USER, {
-    //     variables: {
-    //         username: uUsername
-    //     }
-    // })
-    // const [updateAvatar] = useMutation(UPDATE_AVATAR)
-    // const handleFileChange = async e => {
-    //     const file = e.target.files[0]?.name
-    //     // eslint-disable-next-line
-    //     console.log(file)
-    //     try {
-    //         const Response = await updateAvatar({ variables: { file } })
-    //         // eslint-disable-next-line
-    //         console.log(Response)
-    //     } catch (err) {
-    //         // eslint-disable-next-line
-    //         console.log(err)
-
-    //     }
-    // }
+    const [errors, setErrors] = useState({})
+    const [errorSub, setErrSubmit] = useState(false)
     const { auth } = useAuth()
+    const [modal, setModal ] = useState(false)
     const [input, setInput] = useState(auth?.Uname ? auth?.Uname : '');
     const [inputNum, setInputNum] = useState(auth?.uPhoNum ? auth?.uPhoNum : '');
     const handleChange = e => {
@@ -40,13 +18,51 @@ export const EditDatesUserC = () => {
     const handleChangeNum = e => {
         setInputNum(e.target.value);
     };
+    const uPhoNum = inputNum
+    const [UpdateUser, { loading, data }] = useMutation(CHANGE_DATA_USER)
+    const handleSave = async e => {
+        e.preventDefault()
+        // Declarando variables
+        let errorSubmit = false
+        for (const x in errors) {
+            if (errors[x]) errorSubmit = true
+        }
+        // Validando todos los campos que no sean nulos
+        const errorForm = validationSubmitHooks(e.target.elements)
+        for (const x in errorForm) {
+            if (errorForm[x]) errorSubmit = true
+        }
+        setErrors({ ...errorForm })
+        try {
+            if (!errorSubmit) {
+                const response = await UpdateUser({
+                    variables: {
+                        input: {
+                            uPhoNum,
+                        }
+                    }
+                })
+                setInputNum(response?.data?.UpdateUser)
+                setModal(true)
+            }
+        } catch (error) {
+            setErrSubmit(true)
+        }
+    }
     return (
         <EditDatesUser
             handleChange={handleChange}
             auth={auth}
             input={input}
             inputNum={inputNum}
+            loading={loading}
             handleChangeNum={handleChangeNum}
+            handleSave={handleSave}
+            setModal={setModal}
+            modal={modal}
+            data={data}
+            onChange={({ target }) => setInput(target?.value)}
+            errorSub={errorSub}
         />
     )
 }

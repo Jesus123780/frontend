@@ -10,7 +10,10 @@ import { Maintenance } from './components/Maintenance'
 // Apollo config
 const client = new ApolloClient({
     uri: URL_BASE_GRAPHQL,
-    cache: new InMemoryCache()
+    cache: new InMemoryCache(),
+    headers: {
+        authorization: localStorage.getItem('token') || '',
+    }
 })
 const production = true
 

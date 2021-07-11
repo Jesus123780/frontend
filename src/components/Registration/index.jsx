@@ -1,37 +1,67 @@
 import React, { useEffect, useState } from 'react'
 import ReactDOM from 'react-dom'
 import { useMutation } from '@apollo/client';
-import { setToken } from '../../utils';
-import { LOGIN } from '../../gql/LoginAut';
-import { PColor } from '../../assets/colors';
+import { validationSubmitHooks } from '../../utils';
+import { BGColor } from '../../assets/colors';
 import { Link } from 'react-router-dom';
 import InputHooks from '../InputHooks/InputHooks';
 import { LoadEllipsis } from '../LoadingButton';
 import { ContainerSliderForm, TextRegister, Text, Alert, Container, Overline, ButtonSubmit, InputCheckbox } from './styled'
+import { REGISTER } from '../../gql/Register';
 
 export const Registration = () => {
-    const [login, { loading, error }] = useMutation(LOGIN)
+    const [register, { loading, error: err }] = useMutation(REGISTER)
     const [values, setValues] = useState({})
-
-    const handleChange = e => {
+    const [errors, setErrors] = useState({})
+    const handleChange = (e, error) => {
         setValues({ ...values, [e.target.name]: e.target.value })
+        setErrors({ ...errors, [e.target.name]: error })
     }
+    console.log(err)
     const handleRegister = async e => {
         e.preventDefault()
-        const { email, password } = values
+        // Declarando variables
+        let errorSubmit = false
+        for (const x in errors) {
+            if (errors[x]) errorSubmit = true
+        }
+        // Validando todos los campos que no sean nulos
+        const errorForm = validationSubmitHooks(e.target.elements)
+        for (const x in errorForm) {
+            if (errorForm[x]) errorSubmit = true
+        }
+        setErrors({ ...errorForm })
+        if (errorSubmit) {
+            return alert('Por favor, verifique que los Campos estén correctos.')
+        }
+        const { username, name, email, password, ConfirmPassword, lastName, uPhoNum } = values
+        if (ConfirmPassword !== password) {
+            console.log('Las contraseñas no coinciden')
+        }
         try {
-            const { data } = await login({
-                variables: {
-                    input: {
-                        email,
-                        password,
+            if (!errorSubmit) {
+                const results = await register({
+                    variables: {
+                        input: {
+                            username,
+                            email,
+                            password,
+                            name,
+                            lastName,
+                            uPhoNum,
+                        }
                     }
-                }
-            })
-            const { token } = data.login
-            setToken(token)
-        } catch (erro) {
+
+                })
+                setValues({})
+                setErrors({})
+                // eslint-disable-next-line
+                console.log(results)
+            }
+        } catch (error) {
             setValues({})
+            setErrors({})
+            alert(error.message)
         }
     }
     useEffect(() => {
@@ -51,10 +81,10 @@ export const Registration = () => {
                 <Container>
                     <Overline />
                     <ContainerSliderForm onSubmit={handleRegister}>
-                        <Text>Registrate
-                        </Text>
+                        <Text>Crear cuenta</Text>
                         <div style={{ display: 'flex', flexWrap: 'wrap' }}>
                             <InputHooks
+                                width='50%'
                                 title='Nombre'
                                 required
                                 type="text"
@@ -62,21 +92,30 @@ export const Registration = () => {
                                 value={values?.name}
                                 onChange={handleChange}
                                 name='name'
-                                width='50%'
                             />
                             <InputHooks
-                                title='apellido'
+                                width='50%'
+                                title='Apellido - Opcional'
+                                required
+                                errors={values?.lastName}
+                                value={values?.lastName}
+                                onChange={handleChange}
+                                name='lastName'
+                            />
+                            <InputHooks
+                                width='50%'
+                                title='Usuario'
                                 required
                                 type="text"
-                                errors={values?.apellido}
-                                value={values?.apellido}
+                                errors={values?.username}
+                                value={values?.username}
                                 onChange={handleChange}
-                                name='apellido'
-                                width='50%'
-
+                                name='username'
                             />
 
-                            <InputHooks name="email"
+                            <InputHooks
+                                width='50%'
+                                name="email"
                                 value={values?.email}
                                 errors={values?.email}
                                 email
@@ -85,10 +124,20 @@ export const Registration = () => {
                                 title="Correo Electrónico"
                                 required
                                 range={{ min: 0, max: 180 }}
-                                width='50%'
-
                             />
-                            <InputHooks name="password"
+                            <InputHooks
+                                width='50%'
+                                name="uPhoNum"
+                                value={values?.uPhoNum}
+                                errors={values?.uPhoNum}
+                                onChange={handleChange}
+                                title="Numero"
+                                required
+                                range={{ min: 0, max: 180 }}
+                            />
+                            <InputHooks
+                                width='50%'
+                                name="password"
                                 value={values?.password}
                                 errors={values?.password}
                                 pass
@@ -97,17 +146,30 @@ export const Registration = () => {
                                 required
                                 type="password"
                                 range={{ min: 0, max: 180 }}
+                            />
+                            <InputHooks
                                 width='50%'
+                                name="ConfirmPassword"
+                                value={values?.ConfirmPassword}
+                                errors={values?.ConfirmPassword}
+                                onChange={handleChange}
+                                type="password"
+                                pass
+                                title="Confirmar contraseña"
+                                required
+                                range={{ min: 0, max: 180 }}
+                                passConfirm={{ validate: true, passValue: values?.password }}
                             />
                         </div>
                         <div style={{ display: 'flex', width: '100%', alignItems: 'center' }}>
-                            <InputCheckbox type="checkbox" />
+                            <InputCheckbox type="checkbox" name={values.terCon} value={values.terCon} />
                             <label>Acepto los<Link to='/terminos-y-condiciones'>Términos y Condiciones </Link>y autorizo el uso de mis datos de acuerdo a la Declaración de Privacidad.</label>
                         </div>
-
-                        {error && <Alert>An error occurred</Alert>}
-                        <ButtonSubmit colorFont={PColor} color='2' loading={loading} hoverColor content='center' type='submit'>{loading ? <LoadEllipsis color='#fff' /> : 'Registrate'} </ButtonSubmit>
-                        <TextRegister> Login</TextRegister>
+                        {err && <Alert>An error occurred</Alert>}
+                        <ButtonSubmit colorFont={BGColor} color='1' loading={loading} content='center' type='submit'>{loading ? <LoadEllipsis color='#fff' /> : 'Registrate'} </ButtonSubmit>
+                        <Link to='/login'>
+                            <TextRegister> Login</TextRegister>
+                        </Link>
                     </ContainerSliderForm>
                 </Container>
             </>, document.querySelector('#portal')

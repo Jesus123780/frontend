@@ -12,6 +12,7 @@ export const ButtonHook = styled.div`
 `
 export const ButtonFocus = styled.button`
     background-color: transparent;
+    ${ props=> props?.input?.length < 0 &&css` display: none;` }
 `
 export const Tooltip = styled.div`
     position: absolute;
@@ -62,4 +63,9 @@ export const InputV = styled.input`
     & > button {
         ${ props => props.value && css`display:none;` };
     }
+    ${ props => props.value && css` 
+        & > button{
+             display: none;
+        }
+    ` }
 `

@@ -35,12 +35,15 @@ export const Index = () => {
         data: [
             { id: 1, name: 'Slide 5', image: 'https://http2.mlstatic.com/storage/splinter-admin/o:f_webp,q_auto:best/1624553812377-home-sliderdesktop2x.jpg' },
             { id: 2, name: 'Slide 5', image: 'https://http2.mlstatic.com/storage/splinter-admin/o:f_webp,q_auto:best/1624555002140-home-sliderdesktop2x.jpg' },
+            { id: 3, name: 'Slide 5', image: 'https://http2.mlstatic.com/storage/splinter-admin/o:f_webp,q_auto:best/1624555002140-home-sliderdesktop2x.jpg' },
+            { id: 4, name: 'Slide 5', image: 'https://http2.mlstatic.com/storage/splinter-admin/o:f_webp,q_auto:best/1624555002140-home-sliderdesktop2x.jpg' },
+
         ]
     }
     );
     return (
         <>
-            <CustomSlider state={state} dispatch={dispatch} duration={'500ms'} to={{ pathname: `/${ state.data.id || state.cs_id || state.scs_id ? 'servicios' : 'productos' }/categorias/${ state?.categoryproduct?.cp_id || state?.categoryservice?.cs_id || state.uscs_id || state.uscp_id || state?.cp_id || state?.cs_id }`
+            <CustomSlider autoPlayTime={4000} state={state} dispatch={dispatch} duration={'500ms'} to={{ pathname: `/${ state.data.id || state.cs_id || state.scs_id ? 'servicios' : 'productos' }/categorias/${ state?.categoryproduct?.cp_id || state?.categoryservice?.cs_id || state.uscs_id || state.uscp_id || state?.cp_id || state?.cs_id }`
             }} >
             </CustomSlider>
             <Container>

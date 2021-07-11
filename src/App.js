@@ -94,7 +94,7 @@ function App() {
                                         <Route exact path='/login' component={Login} />
                                         <Route exact path='/recover-account' component={RecoverAccount} />
                                         {/* USUARIO CONFIGURATION */}
-                                        <Route exact path='/mi-cuenta/datos-de-registro' component={EditDatesUser} />
+                                        <Route exact path='/mi-cuenta/datos-de-registro' component={auth ? EditDatesUser : Login} />
 
                                         <Route component={NotFound} />
                                     </Switch>

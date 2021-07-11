@@ -60,7 +60,7 @@ export const Alert = styled.p`
 `
 export const ButtonSubmit = styled.button`
     background-color: ${ ({ color, theme }) => color === '1'
-        ? ' #4065b4'
+        ? ' #ff0000'
         : color === '2'
             ? `${ BGColor }`
             : theme.SFAColor };
@@ -94,6 +94,9 @@ export const ButtonSubmit = styled.button`
                 background-color:${ PColor };
             }
         ` };
+        &:disabled {
+            background-color: #fd000020;
+        }
 `
 export const Text = styled.h2`
 @media only screen and (min-width: 960px){

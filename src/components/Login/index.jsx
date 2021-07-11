@@ -6,9 +6,10 @@ import { LOGIN } from '../../gql/LoginAut';
 import { PColor } from '../../assets/colors';
 import InputHooks from '../InputHooks/InputHooks';
 import { LoadEllipsis } from '../LoadingButton';
-import { ContainerSliderForm, TextRegister, Text, Alert, Container, Overline, ButtonSubmit } from './styled'
 import useAuth from '../hooks/useAuth';
 import { useHistory } from 'react-router'
+import { ContainerSliderForm, TextRegister, Text, Alert, Container, Overline, ButtonSubmit } from './styled'
+import { Link } from 'react-router-dom';
 
 export const Login = () => {
     // Contexto
@@ -83,7 +84,9 @@ export const Login = () => {
                         />
                         {error && <Alert>An error occurred</Alert>}
                         <ButtonSubmit colorFont={PColor} color='2' loading={loading} hoverColor content='center' type='submit'>{loading ? <LoadEllipsis color='#fff' /> : 'Login'} </ButtonSubmit>
-                        <TextRegister> Registrate</TextRegister>
+                        <Link to='/registration'>
+                            <TextRegister> Crear cuenta</TextRegister>
+                        </Link>
                     </ContainerSliderForm>
                 </Container>
             </>, document.querySelector('#portal')

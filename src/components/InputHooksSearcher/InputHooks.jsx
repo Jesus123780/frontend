@@ -39,8 +39,8 @@ const InputHooksSearcher = ({
                 radius={radius}
                 autoComplete={type === 'password' ? 'current-password' : 'true'}
             />
-            {input.length > 0 &&
-                <ButtonFocus
+            {input.length >= 1 &&
+                <ButtonFocus input={input}
                     onClick={() => {
                         reference.current.focus();
                         reference.current.value = '';
