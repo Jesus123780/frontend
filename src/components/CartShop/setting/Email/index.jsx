@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react'
 import InputHooks from '../../../InputHooks/InputHooks'
-// import { RippleButton } from '../../../Ripple'
+import { RippleButton } from '../../../Ripple'
 import { validationSubmitHooks } from '../../../../utils'
 import { Context } from '../../../../Context'
 
@@ -47,7 +47,7 @@ export const Email = () => {
                     required
                     range={{ min: 0, max: 180 }}
                 />
-                {/* <RippleButton label='Actualizar' /> */}
+                <RippleButton label='Actualizar' />
             </form>
         </>
     )

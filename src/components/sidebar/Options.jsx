@@ -19,7 +19,6 @@ const Options = ({ index, active, children, label, path, handleClick, icon, icon
     useEffect(() => {
         setHeight(active ? (height + heightMenu) : refButton.current.clientHeight - refMenu.current.clientHeight)
     }, [active])
-
     return (
         <MenuLeft type='button' onClick={e => handleClick(e)} active={active} ref={refButton} height={height}>
             <Row active={active}>
@@ -30,7 +29,6 @@ const Options = ({ index, active, children, label, path, handleClick, icon, icon
                 </i>
             </Row>
             <OptionMenu active={active} ref={refMenu}>
-                <div />
                 {children}
             </OptionMenu>
         </MenuLeft>

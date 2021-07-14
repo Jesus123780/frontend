@@ -12,7 +12,6 @@ export const ButtonHook = styled.div`
 `
 export const ButtonFocus = styled.button`
     background-color: transparent;
-    ${ props=> props?.input?.length < 0 &&css` display: none;` }
 `
 export const Tooltip = styled.div`
     position: absolute;
@@ -46,7 +45,7 @@ export const Tooltip = styled.div`
 `
 export const InputV = styled.input`
     color: ${ props => (props.type === 'date' && !props.value) ? '#CCC' : '#272323' };
-    padding: ${ props => props.padding ? props.padding : '10px 10px' };
+    padding: ${ props => props.padding ? props.padding : '20px 10px' };
     outline: 0;
     background-color: ${ ({ theme }) => theme.TColor };
     border: none;
@@ -55,7 +54,6 @@ export const InputV = styled.input`
     width: ${ ({ width }) => width ? width : '100%' };
     ${ ({ margin }) => !!margin && css`margin: ${ margin };` }
     ${ ({ minWidth }) => minWidth && css`min-width: ${ minWidth };` }
-    ${ ({ bgColor }) => bgColor && css`background-color: ${ bgColor };` }
     &:focus { border: 1px solid '#35a8df'; }
     &:disabled { cursor: no-drop; }
     &:hover ~ ${ Tooltip } { display: block; }
@@ -63,9 +61,4 @@ export const InputV = styled.input`
     & > button {
         ${ props => props.value && css`display:none;` };
     }
-    ${ props => props.value && css` 
-        & > button{
-             display: none;
-        }
-    ` }
 `

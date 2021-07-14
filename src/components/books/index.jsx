@@ -1,78 +1,44 @@
-import { gql, useLazyQuery, useMutation, useQuery } from '@apollo/client';
-import React, { useState } from 'react'
-import { GET_COURSES } from '../../gql/cursos';
-import { GET_BOOKS } from '../../gql/libros';
-import { AwesomeModal } from '../AwesomeModal';
-import { Loading } from '../Loading';
-import { ShadowCard } from '../ShadowCard'
-import { Container, Card } from './styled';
-import { InputFiles } from '../InputFiles/index'
-import { useLocation } from 'react-router-dom'
+// import { gql, useLazyQuery, useMutation, useQuery } from '@apollo/client';
+import React, { useContext, useEffect, useState }/* , { useState } */ from 'react'
+import { DropdownMenu } from '../dropdown-menu';
+import { Container/* , Card  */ } from './styled';
+import useFullscreenMode from '../hooks/useFullScreenMode';
+// import { InputTags } from '../InputTagsOne';
+import { Rate } from '../Rate';
+import { numberFormatM } from '../../utils';
+import { Context } from '../../Context'
 
 export const Books = () => {
-    const location = useLocation()
-    const [modal, setModal] = useState(false)
-    // const [file, setFile] = useState(false)
-
-    // const onSubmit = e => {
-    //     e.preventDefault()
-    //     fetch.
-    // }
-
-    const UPLOAD_FILE = gql`
-    mutation uploadFile($file: Upload!){
-        uploadFile(file: $file){
-            url
+    const [visibleMenu, setVisibleMenu] = useState(false) // Visibilidad del menú
+    const [positionMenu, setPositionMenu] = useState({})
+    const handleMenu = (e, param) => {
+        setPositionMenu({ x: e.pageX - (param || 0), y: e.pageY })
+        setVisibleMenu(true)
     }
-  }  
-`
-    const { data, loading, error } = useQuery(GET_COURSES);
-    const [getBooks, { data: dataBooks, loading: loadBooks, error: errBooks }] = useLazyQuery(GET_BOOKS)
-    const [uploadFile] = useMutation(UPLOAD_FILE, {
-        onCompleted: datafile => console.log(datafile)
-    })
-    const handleFileChange = e => {
-        const file = e.target.files[0]
-        if (!file) return
-        uploadFile({ variables: { file } })
-    }
+    const [elementRef, FullscreenIcon] = useFullscreenMode();
+    const [rating, setRating] = useState(0);
+    const { setAlertBox } = useContext(Context)
+    useEffect(() => {
+        setAlertBox({ message: 'Hola mundo', duration: 20000, color: 'red' })
+    }, [])
     return (
-        <Container>{console.log(location?.pathname)}
-            <InputFiles />
-            <Card>
-                <ShadowCard>
-                    {!!((loading && !error) || (loading && !error)) && <Loading/>}
-                    {data?.courses?.map(courses => <span key={courses.id}>{courses.title}<br />{courses.description}<br />{courses.description}<br />{courses.topic}</span>)}
-                    <h1>lista de libros</h1>
-
-                    <button onClick={() => getBooks()}>obtener libros</button>
-
-                    {!!((loading && !error) || (loadBooks && !errBooks)) && <Loading/>}
-                    {dataBooks?.books?.map(books => <span key={books.id}>{books.description}, {books.title}<br /></span>)}
-                    <AwesomeModal title='NUEVO REGISTRO' show={modal} onHidde={() => setModal(false)} height='auto' hiddeOnConfirm={false} timeOut={280} footer={false} header={true}>
-                        <h1>Hola</h1>
-                    </AwesomeModal>
-                </ShadowCard>
-            </Card>
-            <Card>
-                <ShadowCard title='Subir img'>
-                    <div>
-                        <input type="file" onChange={e => {
-                            const file = e.target.files[0];
-                            // setFile(file)
-                            console.log(file)
-                        }}></input>
-                    </div>
-                    {/* <button onClick={onSubmit}>Enviar</button> */}
-                </ShadowCard>
-            </Card>
-            <Card>
-                <ShadowCard>
-                    <h1>SUBIR FILE</h1>
-                    <input type="file" onChange={handleFileChange} name="" id="" />
-                </ShadowCard>
-            </Card>
+        <Container ref={elementRef}>
+            <DropdownMenu show={visibleMenu} position={positionMenu} onClickOutside={() => setVisibleMenu(false)} options={[
+                { optionName: 'Trasladar' },
+                { optionName: 'cortar' },
+            ]} />
+            <button onClick={() => handleMenu(!positionMenu)}>
+                onClick</button>
+            {/* <InputTags onChange={() => setVisibleMenu(false)} /> */}
+            <div ref={elementRef} >
+                <div>
+                    {FullscreenIcon}
+                </div>
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'row' }}>
+                <Rate rating={rating} onRating={rate => setRating(rate)} />
+            </div>
+            <p>{numberFormatM(11000000)}</p>
         </Container>
     )
 }
-// use useLazyQuery se ejecuta cuando espera una acción

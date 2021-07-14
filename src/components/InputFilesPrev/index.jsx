@@ -152,7 +152,7 @@ const ImgCont = styled.div`
 const Image = styled.img`
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: scale-down;
 `
 const FileText = styled.span`
     position: absolute;

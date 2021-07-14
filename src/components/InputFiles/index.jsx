@@ -7,26 +7,28 @@ export const InputFiles = () => {
     const fileInputRef = useRef(null);
     const onFileInputChange = event => {
         const { files } = event.target;
+        // Aqui pones los tipos de archivos permitidos y ya we
+        if (!(/\.(jpg|png|gif|jpeg)$/i).test(files[0].name)) return alert('El archivo a adjuntar no es una imagen');
+        // if (files[0]?.size > 20000) return alert('El peso de la imagen no puede exceder los 200kb')
+
         setImages([...images, ...files])
         let newFiles = []
         for (let i = 0; i < files.length; i++) {
             newFiles = [...newFiles, files[i]]
         }
         setPreviewImg([...previewImg, ...newFiles.map(x => URL.createObjectURL(x))])
-        // do something with your files...
     }
-    // const onTargetClick = () => {
-    //     fileInputRef.current.click()
-    // }
     return (<>
         <Box>
             <InputFile
                 onChange={onFileInputChange}
                 ref={fileInputRef}
-                id='dropZone' type='file'
+                id='dropZone'
+                type='file'
                 multiple
-                accept=".jpg, .png"
+
             />
+            {/* { images[0]?.type !== accept && <div>tipo de archivo no aceptado</div> } */}
             <DropZone onClick={() => document.getElementById('dropZone').click()}>
                 {!previewImg?.length &&
                     <Label >Click para subir Archivos</Label>

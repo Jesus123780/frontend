@@ -89,6 +89,7 @@ AwesomeModal.propTypes = {
     footer: PropTypes.bool,
     btnCancel: PropTypes.bool,
     btnConfirm: PropTypes.bool,
+    children: PropTypes.object,
     hiddeOnConfirm: PropTypes.bool,
     timeOut: PropTypes.number,
     height: PropTypes.string,
@@ -97,6 +98,7 @@ AwesomeModal.propTypes = {
     onHidde: PropTypes.func,
     onCancel: PropTypes.func,
     onConfirm: PropTypes.func,
+
     hideOnConfirm: PropTypes.func,
     closeIcon: PropTypes.func,
     borderRadius: PropTypes.func,

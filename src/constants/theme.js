@@ -1,11 +1,12 @@
 export const lightTheme = {
     // Interfaz
-    PColor: '#15558d',
+    PColor: '#333',
     PLVColor:'#dedfe0',
     // Fondo
     BGColor: '#f8f9fa',
     BGAColor: '#FFFFFF',
     BGvColor: '#0fb76b',
+    InvColor: '#FFFFFF',
     // Fuente
     SFColor: '#272b41',
     SFSColor: '#757575',
@@ -15,15 +16,11 @@ export const lightTheme = {
     PLColor: '#f0f0f0',
     PLAColor: '#f4f4f4',
     // Errors and Success
-    EColor: '#f21136',
+    EColor: '#ea1d2c',
     EVColor: '#dc3545;',
     SCColor: ' #28a745;',
     //HoverTable
     HColor: '#f4f4f4',
-    // Errors
-    InvColor: '#FFFFFF',
-    InvTColor: '#757575',
-    TColor: '#FFFFFF',
     InpBorColor: '#dcdcdc',
     BVColor: '#009efb',
 }
@@ -44,9 +41,9 @@ export const darkTheme = {
     PLColor: '#f0f0f0',
     PLAColor: '#727f8c',
     // Errors
-    EColor: '#f21136',
-    InvColor: '#2a3042',
-    InvTColor: '#889ab1',
+    EColor: '#ea1d2c',
+    InvColor: '#090c10',
+    InvTColor: '#161b22',
     TColor: '#40465a',
     InpBorColor: '#40465a',
     BVColor: '#009efb',

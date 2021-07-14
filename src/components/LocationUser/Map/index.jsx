@@ -6,7 +6,7 @@ import { RippleButton } from '../../Ripple'
 import mapStyle from './mapStyles'
 import { IconArrowLeft } from '../../../assets/icons/icons'
 import { PColor } from '../../../assets/colors'
-import { useGoogleAddress } from '../../../components/hooks/useGoogleAddress'
+import { useGoogleAddress } from '../../hooks/useGoogleAddress'
 import { Span } from './styled'
 
 export const Map = props => {

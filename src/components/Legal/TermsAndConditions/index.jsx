@@ -1,32 +1,47 @@
-import React from 'react';
-import { Container, Title, Paragraph } from '../styled';
+// import { gql, useLazyQuery, useMutation, useQuery } from '@apollo/client';
+import React, { useContext, useEffect, useState }/* , { useState } */ from 'react'
+import { DropdownMenu } from '../../dropdown-menu';
+import useFullscreenMode from '../../hooks/useFullScreenMode';
+// import { InputTags } from '../InputTagsOne';
+import { Rate } from '../../Rate';
+import { numberFormatM } from '../../../utils';
+import { Context } from '../../../Context'
 
 export const TermsAndConditions = () => {
-
+    const [visibleMenu, setVisibleMenu] = useState(false) // Visibilidad del menú
+    const [positionMenu, setPositionMenu] = useState({})
+    const handleMenu = (e, param) => {
+        setPositionMenu({ x: e.pageX - (param || 0), y: e.pageY })
+        setVisibleMenu(true)
+    }
+    const [elementRef, FullscreenIcon] = useFullscreenMode();
+    const [rating, setRating] = useState(0);
+    const { setAlertBox } = useContext(Context)
+    useEffect(() => {
+        setAlertBox({ message: 'Temrmns', duration: 20000, color: 'red' })
+    }, [])
     return (
-        <Container>
-            <Title>Términos y Condiciones</Title>
-            <Paragraph> Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nemo, nobis pariatur nihil deleniti aperiam quibusdam, sapiente laboriosam quod laudantium quidem error quam ex quaerat tempore. Nulla eum nostrum distinctio labore?
-            Laborum blanditiis dolorem excepturi harum officiis mollitia expedita molestiae porro! Eligendi rerum odio vel neque error, officia, et, repellendus delectus fugit numquam repudiandae consectetur deleniti sit dolor. Voluptatibus, unde odit.
-            Accusamus, atque praesentium iure eos magni aliquam adipisci vitae reprehenderit! Consectetur iure doloribus doloremque illum a. Ipsa, nesciunt fuga, rerum necessitatibus commodi sapiente cupiditate officiis quia, vero provident nisi laudantium.
-            Tenetur nisi consequuntur, deserunt veniam repellendus esse pariatur eaque officiis ipsa at magnam, ad beatae quibusdam dolorum amet blanditiis, perferendis reprehenderit fugiat ea nihil? Qui quod doloremque possimus libero voluptatibus. </Paragraph>
-            <Paragraph> Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nemo, nobis pariatur nihil deleniti aperiam quibusdam, sapiente laboriosam quod laudantium quidem error quam ex quaerat tempore. Nulla eum nostrum distinctio labore?
-            Laborum blanditiis dolorem excepturi harum officiis mollitia expedita molestiae porro! Eligendi rerum odio vel neque error, officia, et, repellendus delectus fugit numquam repudiandae consectetur deleniti sit dolor. Voluptatibus, unde odit.
-            Accusamus, atque praesentium iure eos magni aliquam adipisci vitae reprehenderit! Consectetur iure doloribus doloremque illum a. Ipsa, nesciunt fuga, rerum necessitatibus commodi sapiente cupiditate officiis quia, vero provident nisi laudantium.
-            Tenetur nisi consequuntur, deserunt veniam repellendus esse pariatur eaque officiis ipsa at magnam, ad beatae quibusdam dolorum amet blanditiis, perferendis reprehenderit fugiat ea nihil? Qui quod doloremque possimus libero voluptatibus. </Paragraph>
-            <Paragraph> Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nemo, nobis pariatur nihil deleniti aperiam quibusdam, sapiente laboriosam quod laudantium quidem error quam ex quaerat tempore. Nulla eum nostrum distinctio labore?
-            Laborum blanditiis dolorem excepturi harum officiis mollitia expedita molestiae porro! Eligendi rerum odio vel neque error, officia, et, repellendus delectus fugit numquam repudiandae consectetur deleniti sit dolor. Voluptatibus, unde odit.
-            Accusamus, atque praesentium iure eos magni aliquam adipisci vitae reprehenderit! Consectetur iure doloribus doloremque illum a. Ipsa, nesciunt fuga, rerum necessitatibus commodi sapiente cupiditate officiis quia, vero provident nisi laudantium.
-            Tenetur nisi consequuntur, deserunt veniam repellendus esse pariatur eaque officiis ipsa at magnam, ad beatae quibusdam dolorum amet blanditiis, perferendis reprehenderit fugiat ea nihil? Qui quod doloremque possimus libero voluptatibus. </Paragraph>
-            <Paragraph> Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nemo, nobis pariatur nihil deleniti aperiam quibusdam, sapiente laboriosam quod laudantium quidem error quam ex quaerat tempore. Nulla eum nostrum distinctio labore?
-            Laborum blanditiis dolorem excepturi harum officiis mollitia expedita molestiae porro! Eligendi rerum odio vel neque error, officia, et, repellendus delectus fugit numquam repudiandae consectetur deleniti sit dolor. Voluptatibus, unde odit.
-            Accusamus, atque praesentium iure eos magni aliquam adipisci vitae reprehenderit! Consectetur iure doloribus doloremque illum a. Ipsa, nesciunt fuga, rerum necessitatibus commodi sapiente cupiditate officiis quia, vero provident nisi laudantium.
-            Tenetur nisi consequuntur, deserunt veniam repellendus esse pariatur eaque officiis ipsa at magnam, ad beatae quibusdam dolorum amet blanditiis, perferendis reprehenderit fugiat ea nihil? Qui quod doloremque possimus libero voluptatibus. </Paragraph>
-            <Paragraph> Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nemo, nobis pariatur nihil deleniti aperiam quibusdam, sapiente laboriosam quod laudantium quidem error quam ex quaerat tempore. Nulla eum nostrum distinctio labore?
-            Laborum blanditiis dolorem excepturi harum officiis mollitia expedita molestiae porro! Eligendi rerum odio vel neque error, officia, et, repellendus delectus fugit numquam repudiandae consectetur deleniti sit dolor. Voluptatibus, unde odit.
-            Accusamus, atque praesentium iure eos magni aliquam adipisci vitae reprehenderit! Consectetur iure doloribus doloremque illum a. Ipsa, nesciunt fuga, rerum necessitatibus commodi sapiente cupiditate officiis quia, vero provident nisi laudantium.
-            Tenetur nisi consequuntur, deserunt veniam repellendus esse pariatur eaque officiis ipsa at magnam, ad beatae quibusdam dolorum amet blanditiis, perferendis reprehenderit fugiat ea nihil? Qui quod doloremque possimus libero voluptatibus. </Paragraph>
-        </Container>
+        <div ref={elementRef}>
+            <DropdownMenu show={visibleMenu} position={positionMenu} onClickOutside={() => setVisibleMenu(false)} options={[
+                { optionName: 'Trasladar' },
+                { optionName: 'cortar' },
+            ]} />
+            <button onClick={() => handleMenu(!positionMenu)}>
+                onClick</button>
+            {/* <InputTags onChange={() => setVisibleMenu(false)} /> */}
+            <div ref={elementRef} >
+                <div>
+                    {FullscreenIcon}
+                </div>
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'row' }}>
+                <Rate rating={rating} onRating={rate => setRating(rate)} />
+            </div>
+            <p>{numberFormatM(11000000)}</p>
+            <div>
+                <h1>Contact</h1>
+                <h1>Contact</h1>
+            </div>
+        </div>
     )
 }
-// use useLazyQuery se ejecuta cuando espera una acción

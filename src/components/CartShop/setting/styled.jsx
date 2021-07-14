@@ -19,9 +19,4 @@ export const Content = styled.div`
         transform: ${ props => props.activeLogin ? 'translateX(0px)' : 'translateX(900px)' };
         transition: all 0.6s ease;
     }
-    &::-webkit-scrollbar {
-        width: 3px;
-        background-color: #dcdcdc;
-        border-radius: 5px;
-    }
 `

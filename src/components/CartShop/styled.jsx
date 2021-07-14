@@ -23,7 +23,7 @@ export const Button = styled.button`
         & > span {
             font-family: PFont-Light;
             font-size: 14px;
-            color: #000 };
+            color: ${ ({ theme }) => `${ theme.PColor }` };
         }
     ` }
     @media only screen and (min-width: 960px){
@@ -31,21 +31,11 @@ export const Button = styled.button`
 `
 export const FloatingBox = styled.div`
     position: absolute;
-    width: 100%;
-    border-radius: 10px;
-    top: 45px;
-    right: 345px;
-    z-index: 99999;
-    display: flex;
-    flex-direction: column;
-    box-shadow: 0px 0px 1px 0px rgb(0 0 0 / 30%);
-    border-radius: 5px;
-    transition: all 0.2s ease;
+    grid-gap: 0 10px;
+    display: grid;
+    transition: all 200ms ease-in-out;
     background-color: ${ BGColor };
     padding: 10px;
-    box-shadow: 0 4px 8px rgb(0 0 0 / 10%);
-    cursor: pointer;
-    
   ${ ({ show }) => show
         ? css`
                   visibility: visible;
@@ -57,16 +47,15 @@ export const FloatingBox = styled.div`
                   margin: 0;
                   visibility: hidden;
                   opacity: 0;
-                  transform: translateY(4px);
+                  transform: translateY(-50px);
               ` }
     @media only screen and (min-width: 960px){
     }
 `
 export const FloatingBoxTwo = styled(FloatingBox)`
     margin: 0 0 0 30px;
-    right: 90px;
+    left: -240px;
     overflow: hidden;
-    width: 290px;
     @media only screen and (min-width: 960px){
     }
   

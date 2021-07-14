@@ -3,10 +3,8 @@ import React, { useState } from 'react'
 import styled, { css } from 'styled-components'
 import { PColor, PLColor } from '../../../assets/colors'
 import { Content } from './styled'
-import { IconLogout, IconArrowLeft, IconArrowRight } from '../../../assets/icons/icons'
-// import useAuth from '../../hooks/useAuth'
-import { RippleButton } from '../../Ripple'
-
+import { IconLogout, IconArrowLeft } from '../../../assets/icons/icons'
+import useAuth from '../../hooks/useAuth'
 import { useApolloClient } from '@apollo/client'
 import { AwesomeModal } from '../../AwesomeModal'
 // 1
@@ -17,6 +15,8 @@ import { Email } from '../setting/Email'
 import { Number } from '../setting/Number'
 // 3
 import { Direction } from '../setting/direction'
+// 3
+import { Task } from '../setting/tasks'
 
 export const Setting = props => {
     const { activeLogin, setActive } = props
@@ -25,11 +25,12 @@ export const Setting = props => {
         e.stopPropagation()
         setActive(!activeLogin)
     }
-    // const { logout } = useAuth()
+    const Theme = localStorage.getItem('theme')
+    const { logout } = useAuth()
     const { client } = useApolloClient()
     const onClickLogout = () => {
         client?.clearStore()
-        // logout()
+        logout()
     }
     // Accion del modal
     const [modal, setModal] = useState(false)
@@ -44,25 +45,48 @@ export const Setting = props => {
                     <IconArrowLeft color={`${ PLColor }`} size='25px' />
                     <span>Configuración y privacidad</span>
                 </GoBack>
-                <RippleButton standard onClick={() => handleClick(1)} label={'Cambiar contraseña'} >
-                    <IconArrowRight size='20px' color={PColor} />
-                </RippleButton>
+                <Option Theme={Theme} >
+                    <Button onClick={() => handleClick(1)} space>
+                        <span>Cambiar contraseña</span>
+                        <IconLogout size='20px' color={PColor} />
+                    </Button>
+                </Option>
                 <Hr />
-                <RippleButton standard onClick={() => handleClick(2)} label={'Cambiar Email'} >
-                    <IconArrowRight size='20px' color={PColor} />
-                </RippleButton>
+                <Option Theme={Theme} >
+                    <Button onClick={() => handleClick(2)} space>
+                        <span>Cambiar Email </span>
+                        <IconLogout size='20px' color={PColor} />
+                    </Button>
+                </Option>
                 <Hr />
-                <RippleButton standard onClick={() => handleClick(3)} label={'Cambiar Numero'} >
-                    <IconArrowRight size='20px' color={PColor} />
-                </RippleButton>
+                <Option onClick={() => handleClick(3)} Theme={Theme} >
+                    <Button space>
+                        <span>Cambiar Numero</span>
+                        <IconLogout size='20px' color={PColor} />
+                    </Button>
+                </Option>
                 <Hr />
-                <RippleButton standard onClick={() => handleClick(4)} label={'Cambiar dirección'} >
-                    <IconArrowRight size='20px' color={PColor} />
-                </RippleButton>
+                <Option Theme={Theme} >
+                    <Button onClick={() => handleClick(4)} space>
+                        <span>Cambiar dirección</span>
+                        <IconLogout size='20px' color={PColor} />
+                    </Button>
+                </Option>
                 <Hr />
-                <RippleButton standard onClick={() => onClickLogout()} label={'Cerrar sesión'} >
-                    <IconLogout size='20px' color={PColor} />
-                </RippleButton>
+                <Option Theme={Theme} >
+                    <Button onClick={() => handleClick(5)} space>
+                        <span>Tareas</span>
+                        <IconLogout size='20px' color={PColor} />
+                    </Button>
+                </Option>
+                <Hr />
+                <Option Theme={Theme} >
+                    <Button onClick={onClickLogout} space>
+                        <span>Cerrar sesión</span>
+                        <IconLogout size='20px' color={PColor} />
+                    </Button>
+                </Option>
+                <Hr />
             </Content>
             {ReactDOM.createPortal(<>
                 <AwesomeModal
@@ -76,7 +100,7 @@ export const Setting = props => {
                     footer={false}
                     padding='0px'
                     size='small'>
-                    {modal === 1 ? <Password /> : (modal === 2) ? <Email /> : (modal === 3) ? <Number /> : (modal === 4) ? <Direction/> : <Number /> }
+                    {modal === 1 ? <Password /> : (modal === 2) ? <Email /> : (modal === 3) ? <Number /> : (modal === 4) ? <Direction/> : (modal === 5) ? <Task /> : <Number /> }
                 </AwesomeModal>
             </>, document.getElementById('root')
             )}
@@ -92,6 +116,17 @@ const Hr = styled.hr`
         background-color: ${ ({ theme }) => `${ theme.BGAColor }32` } ;
     ` };
 
+`
+const Option = styled.div`
+    padding: 15px 0px;
+    cursor: pointer;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    ${ ({ active }) => active && css`border-bottom: ${ active };` }
+    &:hover{
+        background-color: #ffffff1a;
+    }
 `
 const GoBack = styled.div`
     display: flex;

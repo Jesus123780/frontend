@@ -2,7 +2,7 @@
 export const PColor = '#ea1d2c'
 export const PSColor = '#243e87'
 export const PVColor = '#4b80ea'
-export const SEGColor = '#000000'
+export const SEGColor = '#1f1c2f'
 export const SVColor = '#edf2f9'
 /** Colores de fuente */
 export const SFColor = '#272323'

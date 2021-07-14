@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import React, { useEffect, useState } from 'react'
-import { Container } from './styled'
+import { ContainerText, ContainerToast, ContentToast } from './styled'
+// import { IconInfo } from '../../assets/icons/icons'
 
 export const AlertBox = ({ err }) => {
     const [closed, setClosed] = useState(false)
@@ -14,7 +15,21 @@ export const AlertBox = ({ err }) => {
             }
         }
     }, [err])
+    useEffect(() => {
+        const body = document.body
+        body.addEventListener('keyup', e => e.code === 'Escape' && setClosed(true))
+        return () => body.removeEventListener('keyup', () => setClosed)
+    }, [closed])
+
     return (
-        <Container onClick={setClosed} color={err.color} closed={closed} error={!!err?.message}>{(err.message || '')}</Container>
+        <React.Fragment>
+            <ContainerToast onClick={setClosed} color={err.color} closed={closed} error={!!err?.message}>
+                {/* <IconEdit size='40px' /> */}
+                <ContentToast>
+                    <ContainerText >{(err.message || '')}</ContainerText>
+                    <div></div>
+                </ContentToast>
+            </ContainerToast>
+        </React.Fragment>
     )
 }

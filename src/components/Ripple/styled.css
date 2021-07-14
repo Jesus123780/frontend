@@ -1,7 +1,10 @@
 .ripple-button {
     position: relative;
     overflow: hidden;
+    border: none;
     line-height: 1.75;
+    padding: 5px 20px;
+    text-transform: uppercase;
     transition: background-color 0.3s;
     cursor: pointer;
     border-radius: 4px;
@@ -20,6 +23,7 @@
   .ripple-button #ripple-button-label {
     position: relative;
     z-index: 2;
+    font-weight: bold;
   }
   
   @keyframes ripple-animation {

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import ReactDOM from 'react-dom'
 import { useMutation } from '@apollo/client';
 import { decodeToken, setToken } from '../../utils';
 import { LOGIN } from '../../gql/LoginAut';
@@ -57,40 +56,37 @@ export const Login = () => {
     }, [])
     return (
         <>
-            {ReactDOM.createPortal(<>
-                <Container>
-                    <Overline />
-                    <ContainerSliderForm onSubmit={handleRegister}>
-                        <Text>Inicia sesión</Text>
-                        <InputHooks name="email"
-                            value={values?.email}
-                            errors={values?.email}
-                            email
-                            onChange={handleChange}
-                            type="text"
-                            title="Correo Electrónico"
-                            required
-                            range={{ min: 0, max: 180 }}
-                        />
-                        <InputHooks name="password"
-                            value={values?.password}
-                            errors={values?.password}
-                            pass
-                            onChange={handleChange}
-                            title="Contraseña"
-                            required
-                            type="password"
-                            range={{ min: 0, max: 180 }}
-                        />
-                        {error && <Alert>An error occurred</Alert>}
-                        <ButtonSubmit colorFont={PColor} color='2' loading={loading} hoverColor content='center' type='submit'>{loading ? <LoadEllipsis color='#fff' /> : 'Login'} </ButtonSubmit>
-                        <Link to='/registration'>
-                            <TextRegister> Crear cuenta</TextRegister>
-                        </Link>
-                    </ContainerSliderForm>
-                </Container>
-            </>, document.querySelector('#portal')
-            )}
+            <Container>
+                <Overline />
+                <ContainerSliderForm onSubmit={handleRegister}>
+                    <Text>Inicia sesión</Text>
+                    <InputHooks name="email"
+                        value={values?.email}
+                        errors={values?.email}
+                        email
+                        onChange={handleChange}
+                        type="text"
+                        title="Correo Electrónico"
+                        required
+                        range={{ min: 0, max: 180 }}
+                    />
+                    <InputHooks name="password"
+                        value={values?.password}
+                        errors={values?.password}
+                        pass
+                        onChange={handleChange}
+                        title="Contraseña"
+                        required
+                        type="password"
+                        range={{ min: 0, max: 180 }}
+                    />
+                    {error && <Alert>An error occurred</Alert>}
+                    <ButtonSubmit colorFont={PColor} color='2' loading={loading} hoverColor content='center' type='submit'>{loading ? <LoadEllipsis color='#fff' /> : 'Login'} </ButtonSubmit>
+                    <Link to='/registration'>
+                        <TextRegister> Crear cuenta</TextRegister>
+                    </Link>
+                </ContainerSliderForm>
+            </Container>
 
         </>
     )

@@ -1,7 +1,6 @@
 import React, { useReducer } from 'react'
 import { CustomSlider } from './CustomSlider'
-import { App } from '../Draggable'
-import { PaymentData } from '../BannerPayMethods'
+import { PaymentData } from '../paymentData'
 import styled from 'styled-components'
 
 export const Index = () => {
@@ -48,7 +47,6 @@ export const Index = () => {
             </CustomSlider>
             <Container>
                 <PaymentData />
-                <App />
             </Container>
         </>
     )

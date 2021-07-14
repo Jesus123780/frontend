@@ -1,14 +1,14 @@
 import styled, { css } from 'styled-components'
 import { Link } from 'react-router-dom'
-import { SEGColor, BGColor } from '../../assets/colors'
+import { SEGColor, BGColor, PColor } from '../../assets/colors'
 export const Span = styled.span`
     color: ${ props => props.active ? '#131313' : `${ SEGColor }` };
     font-weight: 500;
     display: block;
     margin-right: 1em;
-    /* font-size: 14px; */
-    font-size: calc(14px + (4 - 4) * ((100px - 320px) / (2000 - 5)));
+    font-size: calc(14px + (10 - 4) * ((100px - 320px) / (20px - 5)));
     font-family: Poppins;
+    user-select: none;
 `
 export const LinkOption = styled(Link)`
     display: block;
@@ -19,18 +19,21 @@ export const LinkOption = styled(Link)`
     text-align: left;
     white-space: nowrap;
     margin: 0 30px;
+    & > span a {
+        user-select: none;
+    }
 `
 export const ContainerBurger = styled.div`
     .BurgerMenu__container {
     display: flex;
     flex-direction: column;    
     span {
-      background-color: ${ BGColor };
-      width: 25px;
-      height: 1px;
+      background-color: ${ PColor };
+      width: 30px;
+      height: 2px;
       margin: 4px;
       border-radius: 1px;
-      transition: all .1s ease-out;
+      transition: all .3s ease-out;
     }
     .open:nth-child(1) {
       transform: rotate(45deg) translateY(4px) translateX(6px);
@@ -51,50 +54,31 @@ export const ContainerBurger = styled.div`
     .close:nth-child(3) {
       transform: rotate(0) translateY(0);
     }
-}
-`
-export const SideBarLeft = styled.div`
-    justify-self: center;
-    transition: .3s;
-    position: relative;
-    @media( max-width: 1200px ){
-        display: flex;
-        justify-content: space-between;
-        flex-direction: row;
-    }
+}`
+export const SideBarLeft = styled.aside`
+    flex-direction: column;
+    transition: all .3s ease-out;
+    top: 0;
+    width: 100%; 
     @media( min-width: 1200px ){
-        width: ${ ({ collapsed })=> collapsed ? '40%' : '100%' };
+        ${ ({ collapsed })=> collapsed &&css`
+            /* width: 0pc;  */
+            /* opacity: 0; */
+        ` };
     }
 `
 export const ContainerOptions = styled.div`
-&>button:nth-child(6){
-    align-self: center;
-    display: flex;
-    position: absolute;
-    bottom: 0;
-    width: 90%;
-}
 
     @media( max-width: 1200px ){
         display: none;
-    }
-`
-export const ContainerUserImg = styled.div`
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    & > span{
-        @media( min-width: 1200px ){
-        display: ${ ({ collapsed })=> collapsed ? 'none' : 'flex' };
-    }
     }
 `
 export const ButtonMenu = styled.button`
     background-color: transparent;
 `
 export const Content = styled.div`
-    width: 90%;
-    margin: auto;
+    position: -webkit-sticky;
+    position: sticky;
     @media( max-width: 1200px ){
         width: 100%;
     }
@@ -102,12 +86,9 @@ export const Content = styled.div`
 export const BoxSideBar = styled.aside`
     top: 0;
     height: 100%;
-    background: #fff;
-    transition: all 0.6s ease-in-out;
     box-shadow: 0 0px 40px rgb(0 0 0 / 5%);
-    background: ${ SEGColor };
+    background-color: ${ ({ theme })=> theme.InvTColor };
     width: 100%;
-    border-radius: 10px;
     @media( max-width: 1200px ){
         height: min-content;
         border-radius: 0px;
@@ -115,7 +96,6 @@ export const BoxSideBar = styled.aside`
 `
 export const MenuLeft = styled.button`
     width: 100%;
-    white-space: nowrap;
     height: ${ ({ height }) => height ? height : 'auto' }px;
     display: flex;
     flex-direction: column;
@@ -124,15 +104,11 @@ export const MenuLeft = styled.button`
     outline: 0;
     position: relative;
     font-family: Poppins;
-    background: ${ SEGColor };
+    background-color: ${ ({ theme })=> theme.InvColor };
+    transition: .3s ease-out;
     align-self: ${ ({ alignSelf }) => alignSelf || 'auto' };
     & > div:first-child { pointer-events: none; }
-    transition: .3s;
     overflow: hidden;
-    background-color:${ BGColor };
-    border-radius: 6px;
-    margin: 2px; 
-    border-bottom: 1px solid ${ SEGColor }32;
     & a {
         color: ${ props => props.active ? '#a6b0cf' : '#a6b0cf' };
     }
@@ -142,7 +118,6 @@ export const Row = styled.div`
     display: flex;
     flex-direction: row;
     align-items: center;
-    padding: 8px 30px;
     width: 10%;
     position: relative;
     z-index: 10;
@@ -152,7 +127,10 @@ export const Row = styled.div`
     align-items: center;
     margin: auto;
     padding: 15px 0px;
+    transition: 1s ease-out;
+    
     & > i {
+        transition: .3s ease-out;
         transform: ${ props => props.active ? '' : 'rotate(-90deg)' };
     }
 `
@@ -163,77 +141,16 @@ export const OptionMenu = styled.div`
     position: relative;
     transform: translateY(${ ({ height }) => height }px);
     overflow: hidden;
+    background-color: ${ ({ active })=> active ? '#f3f6fd' : `${ BGColor }` };
+
     padding: 8px 0;
-    & > div {
-        content: '';
-        height: 100%;
-        opacity: 1;
-        width: 3px;
-        background: #e0f3ff;
-        position: absolute;
-        left: 20px;
-        top: 0;
-        border-radius: 15px;
-    }
 `
 export const Box = styled.div`
 `
-export const SubMenu = styled.div`
-    top: 56px;
-    position: absolute;
-    z-index: 99999;
-    display: flex;
-    flex-direction: column;
-    box-shadow: 0 0 3px rgb(0 0 0 / 50%);
-    border-radius: 5px;
-    transition: all 0.2s ease;
-    max-width: 260px;
-    background-color: ${ BGColor };
-  ${ ({ activeMenu }) => activeMenu
-        ? css`
-                  visibility: visible;
-                  opacity: 1;
-                  margin-top: 0;
-                  transform: translateY(0);
-              `
-        : css`
-                
-                  padding: 0;
-                  margin: 0;
-                  visibility: hidden;
-                  opacity: 0;
-                  transform: translateY(20px);
-              ` }
-              &::before {
-    border: 7px solid  ${ BGColor };
-    box-shadow: -2px 2px 2px -1px rgb(0 0 0 / 10%);
-    content: '';
-    right: 0;
-    position: absolute;
-    top: 2px;
-    transform-origin: 0 0;
-    transform: rotate(
-135deg
-);
-    transform: rotate(
-135deg
-);
-}
-`
-export const SpanItem = styled.span`
-margin: 1px 0;
-font-size: 10px;
-    &:hover{
-        background-color: #f8f9fa; 
-    }
-`
 export const BoxTitleNavBar = styled.div`
-    text-align: center;
-    width: 90%;
+    width: 100%;
     border-radius: 10px; 
-    background: ${ SEGColor };
     padding: 30px 0px;
-    justify-content: space-between;
     @media( min-width: 1200px ){
         display: ${ ({ collapsed })=> collapsed ? 'block' : 'flex' };
     }
@@ -241,38 +158,5 @@ export const BoxTitleNavBar = styled.div`
         display: flex;
         padding: 10px;
         border-radius: 0px; 
-    }
-`
-export const Name = styled.h1`
-    color: #FFFFFF;
-    font-size: .02.5em;
-    align-self: center;
-`
-export const ContainerBoxUser = styled.button`
-    width: 100%;
-    position: relative;
-    white-space: nowrap;
-    height: 53px;
-    display: flex;
-    flex-direction: column;
-    cursor: pointer;
-    border: none;
-    outline: 0;
-    font-family: Poppins;
-    background: #2a3042;
-    align-self: auto;
-    border-radius: 15px;
-    margin: 5px;
-    border-radius: 10px;
-    background-color: ${ BGColor };
-    outline: none;
-    border: none;
-    align-items: center;
-    padding: 15px;
-    @media( min-width: 1200px ){
-        width: ${ ({ collapsed })=> collapsed ? '40%' : '100%' };
-    }
-    @media( max-width: 1200px ){
-        display: none;
     }
 `

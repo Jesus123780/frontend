@@ -63,7 +63,7 @@ export const Container = styled.div`
         else if (!show && !state) return 'none';
     } };
     position: fixed;
-    background-color: rgb(0 0 0 / 42%);
+    background: rgba(0,0,0,.4);
     top: 0;
     left: 0;
     bottom: 0;
@@ -109,7 +109,7 @@ export const Modal = styled.div`
 export const ModalHeader = styled.div`
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     padding: 1rem .5rem;
     border-bottom: 1px solid #e9ecef;
     border-top-left-radius: .3rem;
@@ -118,7 +118,8 @@ export const ModalHeader = styled.div`
 
 export const ModalTitle = styled.h4`
     margin: 0;
-    color: #898989;
+    color: ${ ({ theme })=> theme.PColor };
+    text-align: center;
 `
 
 export const BtnClose = styled.button`
@@ -142,7 +143,7 @@ export const BtnClose = styled.button`
 export const ModalBody = styled.div`
     position: relative;
     flex: 1 1 auto;
-    padding: 1rem;
+    padding: ${ ({ padding })=> padding ? padding : '1rem' };
     height: ${ ({ height }) => height ? height : 'auto' };
 `
 

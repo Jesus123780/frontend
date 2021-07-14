@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components'
-import { PColor, BGColor, BColor } from '../../assets/colors'
+
 export const BoxInput = styled.div`
     position: relative;
     padding: ${ ({ padding }) => padding ? padding : '10px 5px' };
@@ -8,24 +8,22 @@ export const BoxInput = styled.div`
 export const Tooltip = styled.div`
     display: block;
     background-color: ${ ({ theme }) => theme.BGColor };
-    padding: 0px 5px;
+    padding: 0px 20px;
     border-radius: 2px;
     z-index: 10;
-    font-size: 13px !important;
-    color: ${ PColor };
+    font-size: 11px;
+    color: #121319;
 `
 export const LabelInput = styled.span`
     position: absolute;
-    text-align: left;
-    font-size: ${ ({ value }) => value ? '16px' : '16px' };
-    top: ${ ({ value }) => value ? '5px' : '27px' };
-    left: 15px;;
+    font-size: ${ ({ value, type }) => (value || type === 'date') ? '16px' : '20px' };
+    top: ${ ({ value, type }) => (value || type === 'date') ? '0px' : '22px' };
     left: ${ ({ left }) => left ? left : '17px' };
-    color: ${ ({ value, labelColor, error }) => value ? (labelColor ? labelColor : '#CCC;') : (error ? '#ccc' : `${ BColor }`) };
-    transition: .2s;
-    background-color: ${ BGColor };
+    color: ${ ({ value, labelColor, error, theme }) => value ? (labelColor ? labelColor : '#272323') : (error ? '#fff' : theme.SFColor) };
+    transition: .3s;
+    background-color: transparent;
     pointer-events: none;
-    font-family: PFont-Light;
+    font-weight: ${ ({ value }) => value ? 600 : 400 };
 `
 export const InputV = styled.input`
     color: ${ props => (props.type === 'date' && !props.value) ? '#CCC' : '#272323' };
@@ -40,7 +38,7 @@ export const InputV = styled.input`
     ${ ({ margin }) => !!margin && css`margin: ${ margin };` }
     ${ ({ minWidth }) => minWidth && css`min-width: ${ minWidth };` }
     &:focus ~ ${ LabelInput } {
-        top: 0px;
+        top: -10px;
         font-size: 20px;
         color: #CCC;
         padding: 0px 5px ;
@@ -48,5 +46,5 @@ export const InputV = styled.input`
     &:focus { border: 1px solid '#35a8df'; }
     &:disabled { cursor: no-drop; }
     &:hover ~ ${ Tooltip } { display: block; }
-    ${ ({ error }) => error && css`border: 1px solid ${ PColor };` }
+    ${ ({ error }) => error && css`box-shadow: 0 0 3px 0px red;` }
 `

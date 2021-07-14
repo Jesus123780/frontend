@@ -1,9 +1,10 @@
 import React from 'react'
+import { InputFile } from '../InputFile'
 import { Container } from './styled'
 export const PaymentData = () => {
     return (
         <Container>
-            <h2>PaymentData</h2>
+            <InputFile />
         </Container>
     )
 }

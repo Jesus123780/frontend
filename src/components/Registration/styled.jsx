@@ -1,11 +1,31 @@
 import styled, { css } from 'styled-components';
 import { BGColor, PColor } from '../../assets/colors';
 
+export const Title = styled.h1`
+font-size: 1.625rem;
+    color: ${ PColor };
+    margin: 20px 0;
+    text-align: center;
+    font-weight: 500; 
+    font-family:  PFont-Medium;
+`
+export const Paragraph = styled.p`
+    font-weight: 300;
+    line-height: 29px;
+    text-align: justify;
+    list-style: initial;
+    color: #717171;
+    font-family:  PFont-Light;
+    margin: 7px 0px;
+    font-size: 14px;
+
+`
+
 export const Container = styled.div`
    position: absolute;
     top: 0;
     left: 0;
-    z-index: 9999999;
+    z-index: 999;
     height: 100vh;
     width: 100%;
     background-color: ${ BGColor };

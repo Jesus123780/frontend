@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react'
 import InputHooks from '../../../InputHooks/InputHooks'
-// import { RippleButton } from '../../../Ripple'
+import { RippleButton } from '../../../Ripple'
 import { validationSubmitHooks } from '../../../../utils'
 import { Context } from '../../../../Context'
 import { CHANGE_PASS_USER } from './queries'
@@ -88,7 +88,7 @@ export const Password = () => {
                     passConfirm={{ validate: true, passValue: values?.newPassword }}
                 />
                 {loading && <span>Cargando</span>}
-                {/* <RippleButton label='Actualizar' /> */}
+                <RippleButton label='Actualizar' />
             </form>
         </>
     )
