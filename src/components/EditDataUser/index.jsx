@@ -66,7 +66,7 @@ export const EditData = ({ auth, input, inputNum, handleChangeNum, handleChange,
                 <button onClick={() => active !== 1 && handleClick(1)}>1</button>
                 <button onClick={() => active !== 2 && handleClick(2)}>2</button>
                 <button onClick={() => active !== 3 && handleClick(3)}>3</button>
-                <Form onSubmit={ active !== 1 ? handleSavePass : handleSave } >{console.log(active)}
+                <Form onSubmit={ active !== 1 ? handleSavePass : handleSave } >
                     <React.Fragment> {active === 1 ?
                         <ContainerAnimation>
                             <BoxInput>

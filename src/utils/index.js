@@ -5,7 +5,7 @@ import moment from 'moment'
 moment.locale('es')
 import jwtDecode from 'jwt-decode'
 import mimeType from '../components/common/MimeType/mimeType'
-import createBrowserHistory from 'history/createBrowserHistory';
+const createBrowserHistory = require('history').createBrowserHistory
 
 // import AWS from 'aws-sdk'
 

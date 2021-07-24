@@ -20,7 +20,6 @@ import { Help } from './components/Help';
 import { Trends } from './components/Tendencias';
 import { Historial } from './components/Historial';
 import { Checkout } from './components/Checkout';
-import { Pqr } from './components/PQR';
 import { Registration } from './components/Registration';
 import { HowToBuy } from './components/ToBuy';
 // import { Contact } from './components/Contact';
@@ -28,6 +27,7 @@ import { RecoverAccount } from './components/RecoverAccount';
 import { Store } from './pages/Store';
 import { Contact } from './components/Contact';
 import { EditData } from './pages/EditData';
+import { PQRC } from './container/Pqr';
 
 function App() {
     const [auth, setAuth] = useState(undefined)
@@ -85,14 +85,15 @@ function App() {
                                             {/* Quienes somos */}
                                             <Route exact path='/quienes-somos' component={AboutUs} />
                                             {/* Ayuda Pagina */}
-                                            <Route exact path='/ayuda' component={Help} />
+                                            <Route exact path='/help' component={Help} />
 
                                             {/* Adicional */}
                                             <Route exact path='/tendencias' component={Trends} />
                                             <Route exact path='/descubrir/las-mejores-promociones/:id' component={Trends} />
                                             {/* Not Found - No encontrada */}
                                             {/* Preguntas frecuentes */}
-                                            <Route exact path='/preguntas-frecuentes' component={Pqr} />
+                                            <Route exact path='/ayuda' component={PQRC} />
+                                            <Route exact path='/ayuda/item/:x.typepqr?.thpName/:x.typepqr?.thpId' component={PQRC} />
                                             {/* Como comprar */}
                                             <Route exact path='/como-comprar' component={HowToBuy} />
                                             {/* Login y registro */}

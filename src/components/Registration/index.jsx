@@ -32,7 +32,6 @@ export const Registration = () => {
         setValues({ ...values, [e.target.name]: e.target.value })
         setErrors({ ...errors, [e.target.name]: error })
     }
-    console.log(err)
     const handleRegister = async e => {
         e.preventDefault()
         // Declarando variables
