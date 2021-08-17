@@ -22,14 +22,6 @@ export const Header = ({ keyTheme, handleTheme, auth, error }) => {
         window.addEventListener('scroll', changeNav)
     }, [])
 
-    const [offsetY, setOffsetY] = useState(0);
-    const handleScroll = () => setOffsetY(window.pageYOffset);
-
-    useEffect(() => {
-        window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, []);
-
     if (error) return <>Error</>
     // eslint-disable-next-line
     // console.log(results, loading, onchange, search)
@@ -38,7 +30,7 @@ export const Header = ({ keyTheme, handleTheme, auth, error }) => {
             {auth &&
                 <HeaderContent scrollNav={scrollNav} >
                     <Content >
-                        <div style={{ transform: `translateY(${ offsetY * 0.8 }px)` }}>
+                        <div>
                             <Link to='/'>
                                 <IconLogo size='80px' color={PColor} />
                             </Link>

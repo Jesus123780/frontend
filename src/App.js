@@ -28,6 +28,7 @@ import { Store } from './pages/Store';
 import { Contact } from './components/Contact';
 import { EditData } from './pages/EditData';
 import { PQRC } from './container/Pqr';
+import { Privacidad } from './components/privacidad';
 
 function App() {
     const [auth, setAuth] = useState(undefined)
@@ -86,6 +87,8 @@ function App() {
                                             <Route exact path='/quienes-somos' component={AboutUs} />
                                             {/* Ayuda Pagina */}
                                             <Route exact path='/help' component={Help} />
+                                            {/* Privacidad */}
+                                            <Route exact path='/privacidad' component={Privacidad} />
 
                                             {/* Adicional */}
                                             <Route exact path='/tendencias' component={Trends} />

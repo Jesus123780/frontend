@@ -26,7 +26,6 @@ export const LayoutMain = ({ children, error }) => {
     )
 }
 const Main = styled.div`
-    overflow-y: auto;
     background-color: ${ ({ theme }) => theme.InvColor };
 
 `
